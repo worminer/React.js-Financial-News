@@ -8,6 +8,7 @@ import MovieAdd from './components/MovieAdd'
 import UserProfile from './components/UserProfile'
 import UserRegister from './components/UserRegister'
 import UserLogin from './components/UserLogin'
+import CategoryAddPage from './components/category/CategoryAddPage'
 
 export default (
   <Route component={ App }>
@@ -16,5 +17,6 @@ export default (
     <Route path="/user/profile/:userId" component={ authorize(UserProfile) }/>
     <Route path='/user/register' component={UserRegister}/>
     <Route path='/user/login' component={UserLogin}/>
+    <Route path='/category/add' component={CategoryAddPage} />
   </Route>
 )
