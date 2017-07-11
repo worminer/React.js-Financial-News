@@ -1,5 +1,5 @@
-const Vote = require('../models/Vote')
-const Movie = require('../models/Movie')
+// const Vote = require('../models/Vote')
+// const Movie = require('../models/Movie')
 
 module.exports = {
   add: {

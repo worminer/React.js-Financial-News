@@ -12,13 +12,13 @@ function seedAdmin () {
 
       let adminData = {
         username: 'admin',
-        firstName: 'Alex',
-        lastName: 'Chobanov',
+        firstName: 'Pesho',
+        lastName: 'Ivanov',
         salt: salt,
         password: hashedPwd,
         age: 33,
         gender: 'Male',
-        roles: ['Admin', 'Critic'],
+        roles: ['Admin']
       }
 
       User.create(adminData).then(admin => {
@@ -43,5 +43,3 @@ module.exports = (envConfig) => {
 
   seedAdmin()
 }
-
-
