@@ -15,6 +15,8 @@ export default (
   <Route component={App}>
     <Route path='/' component={Home} />
     <Route path='/user/profile/:userId' component={ authorize(UserProfile) } />
+    <Route path='/movie/Add' component={authorize(MovieAdd)} />
+    <Route path='/user/profile/:userId' component={authorize(UserProfile)} />
     <Route path='/user/register' component={UserRegister} />
     <Route path='/user/login' component={UserLogin} />
     <Route path='/category/add' component={CategoryAddPage} />
