@@ -34,7 +34,8 @@ let userSchema = mongoose.Schema({
   roles: [{type: mongoose.Schema.Types.String}],
   likes: {type: mongoose.Schema.Types.Number, default: 0},
   articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}],
-  isBlocked: {type: mongoose.Schema.Types.Boolean, default: false}
+  isBlocked: {type: mongoose.Schema.Types.Boolean, default: false},
+  image: {type: mongoose.Schema.Types.String}
 })
 
 userSchema.method({

@@ -4,9 +4,10 @@ let articleSchema = mongoose.Schema({
   title: {type: mongoose.Schema.Types.String, required: true},
   description: {type: mongoose.Schema.Types.String},
   category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true},
-  votes: {type: mongoose.Schema.Types.Number, default: 0},
+  likes: {type: mongoose.Schema.Types.Number, default: 0},
   dateCreated: {type: mongoose.Schema.Types.Date, default: Date.now},
-  creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
+  creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+  image: {type: mongoose.Schema.Types.String}
 })
 
 let indexFields = {
