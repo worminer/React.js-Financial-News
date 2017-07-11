@@ -30,7 +30,7 @@ module.exports = {
       }).catch(error => {
         res.status(500).send({message: error})
       })
-    },
+    }
   },
   login: {
     post: (req, res) => {
@@ -49,7 +49,7 @@ module.exports = {
           res.status(200).send(req.user)
         })
       })
-    },
+    }
   },
   logout: (req, res) => {
     req.logout()
@@ -67,6 +67,6 @@ module.exports = {
 
         res.status(200).send(user)
       })
-    },
-  },
+    }
+  }
 }

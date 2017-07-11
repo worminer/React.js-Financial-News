@@ -1,11 +1,11 @@
-const movieController = require('./movie')
 const commentController = require('./comment')
 const userController = require('./user')
-const voteController = require('./vote')
+const categoryController = require('./category')
+const articleController = require('./article')
 
 module.exports = {
-  movie: movieController,
   comment: commentController,
   user: userController,
-  vote: voteController,
+  category: categoryController,
+  article: articleController
 }

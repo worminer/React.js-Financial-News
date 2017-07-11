@@ -1,4 +1,4 @@
-const Movie = require('../models/Movie')
+// const Movie = require('../models/Movie')
 const Vote = require('../models/Vote')
 
 module.exports = {

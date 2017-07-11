@@ -6,7 +6,12 @@ module.exports = (app) => {
   app.post('/user/login', controllers.user.login.post)
   app.post('/user/logout', controllers.user.logout)
   app.get('/api/user/:userId', controllers.user.profile.get)
-  app.get('/api/user/:userId/rated', controllers.movie.getUserRated.get)
+
+  // Category routes
+  app.post('/api/categories/add', controllers.category.add)
+
+  // Article routes
+  app.post('/api/articles/add', controllers.article.add)
 
   // Movie routes
   // app.post('/api/movies/add', controllers.movie.add.post)
