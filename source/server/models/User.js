@@ -9,30 +9,32 @@ let userSchema = mongoose.Schema({
   username: {
     type: mongoose.Schema.Types.String,
     required: getRequiredPropMsg('Username'),
-    unique: true,
+    unique: true
   },
   password: {
     type: mongoose.Schema.Types.String,
-    required: getRequiredPropMsg('Password'),
+    required: getRequiredPropMsg('Password')
   },
   salt: {
     type: mongoose.Schema.Types.String,
-    required: true,
+    required: true
   },
   firstName: {
-    type: mongoose.Schema.Types.String,
+    type: mongoose.Schema.Types.String
   },
   lastName: {
-    type: mongoose.Schema.Types.String,
+    type: mongoose.Schema.Types.String
   },
   age: {
-    type: mongoose.Schema.Types.Number,
+    type: mongoose.Schema.Types.Number
   },
   gender: {
-    type: mongoose.Schema.Types.String,
+    type: mongoose.Schema.Types.String
   },
   roles: [{type: mongoose.Schema.Types.String}],
-  votes: {type: mongoose.Schema.Types.Number, default: 0},
+  likes: {type: mongoose.Schema.Types.Number, default: 0},
+  articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}],
+  isBlocked: {type: mongoose.Schema.Types.Boolean, default: false}
 })
 
 userSchema.method({
@@ -40,7 +42,7 @@ userSchema.method({
     let hashedPassword = encryption.generateHashedPassword(this.salt, password)
 
     return hashedPassword === this.password
-  },
+  }
 })
 
 const User = mongoose.model('User', userSchema)
