@@ -13,7 +13,7 @@ class FormStore {
       onLoginUserFail: UserActions.loginUserFail,
       onAddCommentFail: MovieActions.addCommentFail,
       onAddVoteSuccess: MovieActions.addVoteSuccess,
-      onAddVoteFail: MovieActions.addVoteFail
+      onAddVoteFail: MovieActions.addVoteFail,
     })
 
     this.username = ''

@@ -45,25 +45,25 @@ export default class UserLogin extends React.Component {
   render () {
     return (
       <Form title='Login'
-        handleSubmit={this.handleSubmit.bind(this)}
-        submitState={this.state.formSubmitState}
-        message={this.state.message}>
+            handleSubmit={this.handleSubmit.bind(this)}
+            submitState={this.state.formSubmitState}
+            message={this.state.message}>
 
         <TextGroup type='text'
-          value={this.state.username}
-          label='Username'
-          handleChange={FormActions.handleUsernameChange}
-          validationState={this.state.usernameValidationState} />
+                   value={this.state.username}
+                   label='Username'
+                   handleChange={FormActions.handleUsernameChange}
+                   validationState={this.state.usernameValidationState}/>
 
         <TextGroup type='password'
-          value={this.state.password}
-          label='Password'
-          handleChange={FormActions.handlePasswordChange}
-          validationState={this.state.passwordValidationState}
-          message={this.state.message} />
+                   value={this.state.password}
+                   label='Password'
+                   handleChange={FormActions.handlePasswordChange}
+                   validationState={this.state.passwordValidationState}
+                   message={this.state.message}/>
 
         <Submit type='btn-primary'
-          value='Login' />
+                value='Login'/>
 
       </Form>
     )

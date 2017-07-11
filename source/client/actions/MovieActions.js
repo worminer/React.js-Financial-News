@@ -1,5 +1,5 @@
 import alt from '../alt'
-import TMDB from '../utilities/RequesterTMDB';
+import TMDB from '../utilities/RequesterTMDB'
 
 class MovieActions {
   constructor () {
@@ -13,17 +13,16 @@ class MovieActions {
       'addCommentSuccess',
       'addCommentFail',
       'addVoteSuccess',
-      'addVoteFail'
+      'addVoteFail',
     )
   }
 
   getFiveRecentMovies () {
     let request = {
       method: 'get',
-      url: '/api/movies/five-recent'
+      url: '/api/movies/five-recent',
     }
-    $.ajax(request)
-      .done(data => this.getFiveRecentMoviesSuccess(data))
+    $.ajax(request).done(data => this.getFiveRecentMoviesSuccess(data))
 
     return true
   }
@@ -31,38 +30,36 @@ class MovieActions {
   getTopTenMovies () {
     let request = {
       url: '/api/movies/top-ten',
-      method: 'get'
+      method: 'get',
     }
 
-    $.ajax(request)
-      .done(payload => {
-        this.emptyTopTenMovies()
-        for (let movie of payload) {
-          let movieData = {
-            _id: movie._id,
-            name: movie.name,
-            description: movie.description,
-            genres: movie.genres,
-            votes: movie.votes,
-            score: movie.score
-          }
+    $.ajax(request).done(payload => {
+      this.emptyTopTenMovies()
+      for (let movie of payload) {
+        let movieData = {
+          _id: movie._id,
+          name: movie.name,
+          description: movie.description,
+          genres: movie.genres,
+          votes: movie.votes,
+          score: movie.score,
+        }
 
-          TMDB.getMoviePoster(movie.name).then(tmdbResponse => {
-            movieData.moviePosterUrl = tmdbResponse.posterUrl
+        TMDB.getMoviePoster(movie.name).then(tmdbResponse => {
+          movieData.moviePosterUrl = tmdbResponse.posterUrl
 
-            getComments(movie._id).then(comments => {
-              movieData.comments = comments
+          getComments(movie._id).then(comments => {
+            movieData.comments = comments
 
-              getLoggedInUserVote(movie._id).then(vote => {
-                movieData.loggedInUserScore = vote.voteScore
+            getLoggedInUserVote(movie._id).then(vote => {
+              movieData.loggedInUserScore = vote.voteScore
 
-                this.addMovieToTopTen(movieData)
-              })
+              this.addMovieToTopTen(movieData)
             })
           })
-        }
-      })
-      .fail(err => this.getTopTenMoviesFail(err))
+        })
+      }
+    }).fail(err => this.getTopTenMoviesFail(err))
 
     return true
   }
@@ -72,16 +69,14 @@ class MovieActions {
       url: `/api/movies/${movieId}/comments`,
       method: 'post',
       contentType: 'application/json',
-      data: JSON.stringify({content: comment})
+      data: JSON.stringify({content: comment}),
     }
 
-    $.ajax(request)
-      .done(data => {
-        this.addCommentSuccess(data)
-      })
-      .fail(err => {
-        this.addCommentFail(err.responseJSON)
-      })
+    $.ajax(request).done(data => {
+      this.addCommentSuccess(data)
+    }).fail(err => {
+      this.addCommentFail(err.responseJSON)
+    })
 
     return true
   }
@@ -91,15 +86,13 @@ class MovieActions {
       url: `/api/movies/${movieId}/vote`,
       method: 'post',
       contentType: 'application/json',
-      data: JSON.stringify({score})
+      data: JSON.stringify({score}),
     }
 
-    $.ajax(request)
-      .then(data => {
-        data.movieId = movieId,
+    $.ajax(request).then(data => {
+      data.movieId = movieId,
         this.addVoteSuccess(data)
-      })
-      .fail(err => this.addVoteFail(err.responseJSON))
+    }).fail(err => this.addVoteFail(err.responseJSON))
 
     return true
   }
@@ -111,19 +104,17 @@ function getComments (movieId) {
   return new Promise((resolve, reject) => {
     let request = {
       url: `/api/movies/${movieId}/comments`,
-      method: 'get'
+      method: 'get',
     }
 
-    $.ajax(request)
-      .done(data => resolve(data))
-      .fail(err => reject(err))
+    $.ajax(request).done(data => resolve(data)).fail(err => reject(err))
   })
 }
 
-function getLoggedInUserVote(movieId, userId) {
-  return new Promise (resolve => {
+function getLoggedInUserVote (movieId, userId) {
+  return new Promise(resolve => {
     let request = {
-      method: 'get'
+      method: 'get',
     }
 
     if (userId) {
@@ -132,7 +123,6 @@ function getLoggedInUserVote(movieId, userId) {
       request.url = `/api/movies/${movieId}/vote?user=loggedInUser`
     }
 
-    $.ajax(request)
-      .done(data => resolve(data))
+    $.ajax(request).done(data => resolve(data))
   })
 }

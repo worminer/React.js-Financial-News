@@ -35,7 +35,7 @@ class MovieStore {
   onAddCommentSuccess (data) {
     let comment = data.comment
     let movieId = data.comment.movie
-    for (let i = 0, n = this.topTenMovies.length; i < n; i++ ) {
+    for (let i = 0, n = this.topTenMovies.length; i < n; i++) {
       if (this.topTenMovies[i]._id === movieId) {
         this.topTenMovies[i].comments.unshift(comment)
       }

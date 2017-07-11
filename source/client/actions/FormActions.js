@@ -16,7 +16,7 @@ class FormActions {
       'handleCommentChange',
       'commentValidationFail',
       'handleScoreChange',
-      'scoreValidationFail'
+      'scoreValidationFail',
     )
   }
 }

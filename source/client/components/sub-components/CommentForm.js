@@ -35,18 +35,18 @@ export default class MovieCommentsPanelForm extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)} >
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <div className={`form-group ${this.state.commentValidationState}`}>
           <label className='control-label' htmlFor='content'>Add comment</label>
           <textarea id='content'
-            className='form-control'
-            value={this.state.comment}
-            onChange={FormActions.handleCommentChange}
-            rows='5' />
+                    className='form-control'
+                    value={this.state.comment}
+                    onChange={FormActions.handleCommentChange}
+                    rows='5'/>
           <span className={`help-block`}>{ this.state.message }</span>
         </div>
         <div className='form-group'>
-          <input type='submit' className='btn btn-primary' value='Comment' />
+          <input type='submit' className='btn btn-primary' value='Comment'/>
         </div>
       </form>
     )

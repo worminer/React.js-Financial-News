@@ -1,69 +1,69 @@
-import alt from '../alt';
-import MovieAddActions from '../actions/MovieAddActions';
-import Helpers from '../utilities/Helpers';
+import alt from '../alt'
+import MovieAddActions from '../actions/MovieAddActions'
+import Helpers from '../utilities/Helpers'
 
 class MovieAddStore {
-    constructor() {
-        this.bindActions(MovieAddActions);
+  constructor () {
+    this.bindActions(MovieAddActions)
 
-        this.name =  '';
-        this.description =  '';
-        this.genres =  [];
-        this.moviePosterUrl = '';
-        this.genresValidationState =  '';
-        this.nameValidationState =  '';
-        this.helpBlock =  '';
-    }
+    this.name = ''
+    this.description = ''
+    this.genres = []
+    this.moviePosterUrl = ''
+    this.genresValidationState = ''
+    this.nameValidationState = ''
+    this.helpBlock = ''
+  }
 
-    onAddMovieSuccess() {
-        console.log('Added movie!');
-    }
+  onAddMovieSuccess () {
+    console.log('Added movie!')
+  }
 
-    onAddMovieFail(err) {
-        console.log('Failed to add movie', err);
-    }
+  onAddMovieFail (err) {
+    console.log('Failed to add movie', err)
+  }
 
-    onGetMoviePosterSuccess(data) {
-        this.moviePosterUrl = data.posterUrl;
-    }
+  onGetMoviePosterSuccess (data) {
+    this.moviePosterUrl = data.posterUrl
+  }
 
-    onGetMoviePosterFail(err) {
-        console.log('Could not get movie post', err);
-    }
+  onGetMoviePosterFail (err) {
+    console.log('Could not get movie post', err)
+  }
 
-    onHandleNameChange(e) {
-        this.name = e.target.value;
-        this.nameValidationState =  '';
-        this.helpBlock =  '';
-    }
+  onHandleNameChange (e) {
+    this.name = e.target.value
+    this.nameValidationState = ''
+    this.helpBlock = ''
+  }
 
-    onHandleDescriptionChange(e) {
-        this.description = e.target.value;
-        this.genresValidationState =  '';
-        this.helpBlock =  '';
-    }
+  onHandleDescriptionChange (e) {
+    this.description = e.target.value
+    this.genresValidationState = ''
+    this.helpBlock = ''
+  }
 
-    onHandleGenresChange(e) {
-        console.log(e);
-        let genreValue = e.target.value;
-        if (this.genres.indexOf(genreValue) === -1) {
-            this.genres = Helpers.appendToArray(genreValue, this.genres)
-        } else {
-            this.genres = Helpers.removeFromArray(genreValue, this.genres)
-        }
-        this.genresValidationState =  '';
-        this.helpBlock =  '';
+  onHandleGenresChange (e) {
+    console.log(e)
+    let genreValue = e.target.value
+    if (this.genres.indexOf(genreValue) === -1) {
+      this.genres = Helpers.appendToArray(genreValue, this.genres)
+    } else {
+      this.genres = Helpers.removeFromArray(genreValue, this.genres)
     }
+    this.genresValidationState = ''
+    this.helpBlock = ''
+  }
 
-    onNameValidationFail() {
-        this.nameValidationState = 'has-error';
-        this.helpBlock = 'Enter movie name';
-    }
+  onNameValidationFail () {
+    this.nameValidationState = 'has-error'
+    this.helpBlock = 'Enter movie name'
+  }
 
-    onGenresValidationFail() {
-        this.genresValidationState = 'has-error';
-        this.helpBlock = 'Select atleast one movie genre';
-    }
+  onGenresValidationFail () {
+    this.genresValidationState = 'has-error'
+    this.helpBlock = 'Select atleast one movie genre'
+  }
 }
 
-export default alt.createStore(MovieAddStore);
+export default alt.createStore(MovieAddStore)
