@@ -7,6 +7,7 @@ class CategoryStore {
 
     this.name = ''
     this.categoryCreated = false
+    this.categories = ''
   }
 
   onCreateCategorySuccess (category) {
@@ -15,6 +16,10 @@ class CategoryStore {
 
   onHandleNameChange (ev) {
     this.name = ev.target.value
+  }
+
+  onGetAllCategoriesSuccess (categories) {
+    th
   }
 }
 

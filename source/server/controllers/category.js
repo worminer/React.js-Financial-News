@@ -10,5 +10,11 @@ module.exports = {
     Category.create(categoryData).then(category => {
       res.status(200).send({category})
     })
+  },
+
+  all: (req, res) => {
+    Category.find().then(categories => {
+      res.status(200).send(categories)
+    })
   }
 }

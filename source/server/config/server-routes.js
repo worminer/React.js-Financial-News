@@ -9,7 +9,7 @@ module.exports = (app) => {
 
   // Category routes
   app.post('/api/categories/add', controllers.category.add)
-
+  app.get('/api/categories/all', controllers.category.all)
   // Article routes
   app.post('/api/articles/add', controllers.article.add)
 
