@@ -11,6 +11,7 @@ class UserActions {
     )
   }
 
+
   registerUser (data) {
     let request = {
       url: '/user/register',
@@ -49,6 +50,7 @@ class UserActions {
 
     return true
   }
+
 }
 
 export default alt.createActions(UserActions)

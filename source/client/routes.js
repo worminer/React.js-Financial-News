@@ -16,5 +16,6 @@ export default (
     <Route path="/user/profile/:userId" component={ authorize(UserProfile) }/>
     <Route path='/user/register' component={UserRegister}/>
     <Route path='/user/login' component={UserLogin}/>
+
   </Route>
 )

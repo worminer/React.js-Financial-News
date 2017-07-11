@@ -5,18 +5,25 @@ import FormStore from '../stores/FormStore'
 import Form from './form/Form'
 import TextGroup from './form/TextGroup'
 import Submit from './form/Submit'
+import ShowMessage from './sub-components/ShowPopupMessage'
 
 export default class UserLogin extends React.Component {
   constructor (props) {
     super(props)
     this.state = FormStore.getState()
     this.onChange = this.onChange.bind(this)
+
   }
 
   onChange (state) {
-    this.setState(state)
+    if (state.relocate) {
+      ShowMessage.success(state.message)
+      this.props.history.push(state.relocate);
+    } else {
+      this.setState(state)
+    }
   }
-
+  
   componentDidMount () {
     FormStore.listen(this.onChange)
   }
@@ -41,31 +48,46 @@ export default class UserLogin extends React.Component {
 
     UserActions.loginUser({username, password})
   }
-
+  
   render () {
     return (
-      <Form title='Login'
+      <div className='container'>
+        <div className='row flipInX animated'>
+          <Form title='Login'
             handleSubmit={this.handleSubmit.bind(this)}
             submitState={this.state.formSubmitState}
-            message={this.state.message}>
+            message={this.state.message}
+            className="col-md-4 col-md-offset-4"
+          >
+            <TextGroup
+              type='text'
+              id='username'
+              value={this.state.username}
+              label='Username'
+              handleChange={FormActions.handleUsernameChange}
+              validationState={this.state.usernameValidationState}
+            />
 
-        <TextGroup type='text'
-                   value={this.state.username}
-                   label='Username'
-                   handleChange={FormActions.handleUsernameChange}
-                   validationState={this.state.usernameValidationState}/>
+            <TextGroup
+              type='password'
+              id="password"
+              value={this.state.password}
+              label='Password'
+              handleChange={FormActions.handlePasswordChange}
+              validationState={this.state.passwordValidationState}
+              message={this.state.message}
+            />
 
-        <TextGroup type='password'
-                   value={this.state.password}
-                   label='Password'
-                   handleChange={FormActions.handlePasswordChange}
-                   validationState={this.state.passwordValidationState}
-                   message={this.state.message}/>
-
-        <Submit type='btn-primary'
-                value='Login'/>
-
-      </Form>
+            <div className="">
+              <Submit
+                className='btn-primary'
+                id="submit"
+                value='Login'
+              />
+            </div>
+          </Form>
+        </div>
+      </div>
     )
   }
 }

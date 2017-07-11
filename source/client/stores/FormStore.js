@@ -27,6 +27,7 @@ class FormStore {
     this.usernameValidationState = ''
     this.passwordValidationState = ''
     this.message = ''
+    this.relocate = ''
   }
 
   onUnauthorizedAccessAttempt () {
@@ -41,6 +42,7 @@ class FormStore {
     this.usernameValidationState = ''
     this.passwordValidationState = ''
     this.message = 'User login successful'
+    this.relocate = '/'
   }
 
   onLoginUserFail (err) {
@@ -50,12 +52,15 @@ class FormStore {
     this.message = err.message
   }
 
-  onRegisterUserSuccess () {
+  onRegisterUserSuccess (data) {
+    console.log(data)
     console.log('FormStore register success')
     this.formSubmitState = 'has-success'
     this.usernameValidationState = ''
     this.passwordValidationState = ''
     this.message = 'User register successful'
+    this.relocate = '/user/login'
+
   }
 
   onRegisterUserFail (err) {

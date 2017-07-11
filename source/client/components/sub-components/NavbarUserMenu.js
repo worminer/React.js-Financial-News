@@ -26,6 +26,7 @@ export default class NavbarUserMenu extends React.Component {
   }
 
   render () {
+
     let userMenu
     if (!this.state.loggedInUserId) {
       userMenu = (
@@ -51,7 +52,6 @@ export default class NavbarUserMenu extends React.Component {
         </ul>
       )
     }
-
     return (
       <div>
         { userMenu }
