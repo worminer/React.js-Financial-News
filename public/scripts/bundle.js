@@ -496,7 +496,7 @@ var Alt = function () {
 
 exports['default'] = Alt;
 module.exports = exports['default'];
-},{"./actions":1,"./functions":2,"./store":6,"./utils/AltUtils":7,"./utils/StateFunctions":8,"flux":13}],4:[function(require,module,exports){
+},{"./actions":1,"./functions":2,"./store":6,"./utils/AltUtils":7,"./utils/StateFunctions":8,"flux":12}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -659,7 +659,7 @@ var AltStore = function () {
 
 exports['default'] = AltStore;
 module.exports = exports['default'];
-},{"../functions":2,"transmitter":33}],5:[function(require,module,exports){
+},{"../functions":2,"transmitter":34}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -897,7 +897,7 @@ var StoreMixin = {
 
 exports['default'] = StoreMixin;
 module.exports = exports['default'];
-},{"../functions":2,"transmitter":33}],6:[function(require,module,exports){
+},{"../functions":2,"transmitter":34}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1431,59 +1431,6 @@ function shim (obj) {
 }
 
 },{}],12:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule invariant
- */
-
-"use strict";
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function (condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-}).call(this,require('_process'))
-
-},{"_process":31}],13:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1495,7 +1442,7 @@ module.exports = invariant;
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":14}],14:[function(require,module,exports){
+},{"./lib/Dispatcher":13}],13:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -1730,7 +1677,60 @@ var Dispatcher = (function () {
 module.exports = Dispatcher;
 }).call(this,require('_process'))
 
-},{"_process":31,"fbjs/lib/invariant":12}],15:[function(require,module,exports){
+},{"_process":32,"fbjs/lib/invariant":14}],14:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule invariant
+ */
+
+"use strict";
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var invariant = function (condition, format, a, b, c, d, e, f) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
+}).call(this,require('_process'))
+
+},{"_process":32}],15:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -1861,7 +1861,7 @@ function readState(key) {
 }
 }).call(this,require('_process'))
 
-},{"_process":31,"warning":34}],18:[function(require,module,exports){
+},{"_process":32,"warning":35}],18:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2130,7 +2130,7 @@ exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./Actions":15,"./DOMStateStorage":17,"./DOMUtils":18,"./ExecutionEnvironment":19,"./createDOMHistory":21,"./parsePath":26,"_process":31,"invariant":28}],21:[function(require,module,exports){
+},{"./Actions":15,"./DOMStateStorage":17,"./DOMUtils":18,"./ExecutionEnvironment":19,"./createDOMHistory":21,"./parsePath":26,"_process":32,"invariant":28}],21:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2174,7 +2174,7 @@ exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./DOMUtils":18,"./ExecutionEnvironment":19,"./createHistory":22,"_process":31,"invariant":28}],22:[function(require,module,exports){
+},{"./DOMUtils":18,"./ExecutionEnvironment":19,"./createHistory":22,"_process":32,"invariant":28}],22:[function(require,module,exports){
 //import warning from 'warning'
 'use strict';
 
@@ -2599,7 +2599,7 @@ exports['default'] = parsePath;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"./extractPath":25,"_process":31,"warning":34}],27:[function(require,module,exports){
+},{"./extractPath":25,"_process":32,"warning":35}],27:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2627,7 +2627,7 @@ exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 
-},{"_process":31,"warning":34}],28:[function(require,module,exports){
+},{"_process":32,"warning":35}],28:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2683,7 +2683,7 @@ module.exports = invariant;
 
 }).call(this,require('_process'))
 
-},{"_process":31}],29:[function(require,module,exports){
+},{"_process":32}],29:[function(require,module,exports){
 module.exports = isPromise;
 
 function isPromise(obj) {
@@ -12946,6 +12946,65 @@ return jQuery;
 } );
 
 },{}],31:[function(require,module,exports){
+(function (global){
+// http://www.rajdeepd.com/articles/chrome/localstrg/LocalStorageSample.htm
+
+// NOTE:
+// this varies from actual localStorage in some subtle ways
+
+// also, there is no persistence
+// TODO persist
+(function () {
+  "use strict";
+
+  var db;
+
+  function LocalStorage() {
+  }
+  db = LocalStorage;
+
+  db.prototype.getItem = function (key) {
+    if (this.hasOwnProperty(key)) {
+      return String(this[key]);
+    }
+    return null;
+  };
+
+  db.prototype.setItem = function (key, val) {
+    this[key] = String(val);
+  };
+
+  db.prototype.removeItem = function (key) {
+    delete this[key];
+  };
+
+  db.prototype.clear = function () {
+    var self = this;
+    Object.keys(self).forEach(function (key) {
+      self[key] = undefined;
+      delete self[key];
+    });
+  };
+
+  db.prototype.key = function (i) {
+    i = i || 0;
+    return Object.keys(this)[i];
+  };
+
+  db.prototype.__defineGetter__('length', function () {
+    return Object.keys(this).length;
+  });
+
+  if (global.localStorage) {
+    module.exports = localStorage;
+  } else {
+    module.exports = new LocalStorage();
+  }
+}());
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{}],32:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -13131,7 +13190,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*
  * Toastr
  * Copyright 2012-2015
@@ -13568,7 +13627,7 @@ process.umask = function() { return 0; };
     }
 }));
 
-},{"jquery":30}],33:[function(require,module,exports){
+},{"jquery":30}],34:[function(require,module,exports){
 "use strict";
 
 function transmitter() {
@@ -13621,7 +13680,7 @@ function transmitter() {
 }
 
 module.exports = transmitter;
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -13686,7 +13745,7 @@ module.exports = warning;
 
 }).call(this,require('_process'))
 
-},{"_process":31}],35:[function(require,module,exports){
+},{"_process":32}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13786,7 +13845,7 @@ var ArticleActions = function () {
 
 exports.default = _alt2.default.createActions(ArticleActions);
 
-},{"../alt":41}],36:[function(require,module,exports){
+},{"../alt":42}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13835,7 +13894,7 @@ var CategoryActions = function () {
 
 exports.default = _alt2.default.createActions(CategoryActions);
 
-},{"../alt":41}],37:[function(require,module,exports){
+},{"../alt":42}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13853,12 +13912,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var FormActions = function FormActions() {
   _classCallCheck(this, FormActions);
 
-  this.generateActions('handleUsernameChange', 'handlePasswordChange', 'handleConfirmedPasswordChange', 'handleFirstNameChange', 'handleLastNameChange', 'handleAgeChange', 'handleGenderChange', 'usernameValidationFail', 'passwordValidationFail', 'unauthorizedAccessAttempt', 'handleCommentChange', 'commentValidationFail', 'handleScoreChange', 'scoreValidationFail');
+  this.generateActions('handleUsernameChange', 'handlePasswordChange', 'handleConfirmedPasswordChange', 'handleFirstNameChange', 'handleLastNameChange', 'handleAgeChange', 'handleGenderChange', 'usernameValidationFail', 'passwordValidationFail', 'unauthorizedAccessAttempt', 'handleCommentChange', 'commentValidationFail', 'handleScoreChange', 'scoreValidationFail', 'handleLastPictureChange');
 };
 
 exports.default = _alt2.default.createActions(FormActions);
 
-},{"../alt":41}],38:[function(require,module,exports){
+},{"../alt":42}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14050,7 +14109,7 @@ function getLoggedInUserVote(movieId, userId) {
   });
 }
 
-},{"../alt":41,"../utilities/RequesterTMDB":83}],39:[function(require,module,exports){
+},{"../alt":42,"../utilities/RequesterTMDB":84}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14073,7 +14132,7 @@ var NavbarActions = function NavbarActions() {
 
 exports.default = _alt2.default.createActions(NavbarActions);
 
-},{"../alt":41}],40:[function(require,module,exports){
+},{"../alt":42}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14102,6 +14161,7 @@ var UserActions = function () {
     value: function registerUser(data) {
       var _this = this;
 
+      console.log(data);
       var request = {
         url: '/user/register',
         method: 'post',
@@ -14158,7 +14218,7 @@ var UserActions = function () {
 
 exports.default = _alt2.default.createActions(UserActions);
 
-},{"../alt":41}],41:[function(require,module,exports){
+},{"../alt":42}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14173,7 +14233,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = new _alt2.default();
 
-},{"alt":3}],42:[function(require,module,exports){
+},{"alt":3}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14257,7 +14317,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"../actions/UserActions":40,"../stores/UserStore":80,"./Footer":43,"./Navbar":45,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/UserActions":41,"../stores/UserStore":81,"./Footer":44,"./Navbar":46,"react":"react"}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14420,7 +14480,7 @@ var Footer = function (_React$Component) {
 
 exports.default = Footer;
 
-},{"../actions/ArticleActions":35,"../stores/ArticleStore":76,"react":"react","react-router":"react-router"}],44:[function(require,module,exports){
+},{"../actions/ArticleActions":36,"../stores/ArticleStore":77,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14542,7 +14602,7 @@ var Home = function (_React$Component) {
 
 exports.default = Home;
 
-},{"../actions/ArticleActions":35,"../stores/ArticleStore":76,"../utilities/Helpers":82,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
+},{"../actions/ArticleActions":36,"../stores/ArticleStore":77,"../utilities/Helpers":83,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14704,7 +14764,7 @@ var Navbar = function (_React$Component) {
 
 exports.default = Navbar;
 
-},{"../actions/NavbarActions":39,"../stores/NavbarStore":79,"./user/NavbarUserMenu":64,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
+},{"../actions/NavbarActions":40,"../stores/NavbarStore":80,"./user/NavbarUserMenu":65,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14835,7 +14895,7 @@ var ArticleCard = function (_React$Component) {
 
 exports.default = ArticleCard;
 
-},{"../../utilities/Helpers":82,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+},{"../../utilities/Helpers":83,"react":"react","react-router":"react-router"}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14920,7 +14980,7 @@ var ArticleDetailsPage = function (_React$Component) {
 
 exports.default = ArticleDetailsPage;
 
-},{"../../actions/ArticleActions":35,"../../stores/ArticleStore":76,"./../sub-components/ShowPopupMessage":62,"./ArticleCard":46,"react":"react"}],48:[function(require,module,exports){
+},{"../../actions/ArticleActions":36,"../../stores/ArticleStore":77,"./../sub-components/ShowPopupMessage":63,"./ArticleCard":47,"react":"react"}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15142,7 +15202,7 @@ var CreateArticlePage = function (_React$Component) {
 
 exports.default = CreateArticlePage;
 
-},{"../../actions/ArticleActions":35,"../../alt":41,"../../stores/ArticleStore":76,"./../sub-components/ShowPopupMessage":62,"react":"react"}],49:[function(require,module,exports){
+},{"../../actions/ArticleActions":36,"../../alt":42,"../../stores/ArticleStore":77,"./../sub-components/ShowPopupMessage":63,"react":"react"}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15294,7 +15354,7 @@ var CategoryAddPage = function (_React$Component) {
 
 exports.default = CategoryAddPage;
 
-},{"../../actions/CategoryActions":36,"../../alt":41,"../../stores/CategoryStore":77,"./../sub-components/ShowPopupMessage":62,"react":"react"}],50:[function(require,module,exports){
+},{"../../actions/CategoryActions":37,"../../alt":42,"../../stores/CategoryStore":78,"./../sub-components/ShowPopupMessage":63,"react":"react"}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15406,7 +15466,7 @@ var MovieCard = function (_React$Component) {
 
 exports.default = MovieCard;
 
-},{"./MovieCommentsPanel":51,"./MovieInfo":52,"./MoviePanelsToggle":53,"./MoviePoster":54,"./MovieVotePanel":55,"react":"react"}],51:[function(require,module,exports){
+},{"./MovieCommentsPanel":52,"./MovieInfo":53,"./MoviePanelsToggle":54,"./MoviePoster":55,"./MovieVotePanel":56,"react":"react"}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15492,7 +15552,7 @@ var MovieCommentsPanel = function (_React$Component) {
 
 exports.default = MovieCommentsPanel;
 
-},{"../sub-components/CommentForm":61,"react":"react"}],52:[function(require,module,exports){
+},{"../sub-components/CommentForm":62,"react":"react"}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15599,7 +15659,7 @@ var MovieInfo = function (_React$Component) {
 
 exports.default = MovieInfo;
 
-},{"../../utilities/Helpers":82,"react":"react","react-router":"react-router"}],53:[function(require,module,exports){
+},{"../../utilities/Helpers":83,"react":"react","react-router":"react-router"}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15687,7 +15747,7 @@ var MoviePanelToggles = function (_React$Component2) {
 
 exports.default = MoviePanelToggles;
 
-},{"../../utilities/Authorize":81,"react":"react","react-router":"react-router"}],54:[function(require,module,exports){
+},{"../../utilities/Authorize":82,"react":"react","react-router":"react-router"}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15738,7 +15798,7 @@ var MoviePoster = function (_React$Component) {
 
 exports.default = MoviePoster;
 
-},{"react":"react"}],55:[function(require,module,exports){
+},{"react":"react"}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15866,7 +15926,7 @@ var MovieVotePanel = function (_React$Component) {
 
 exports.default = MovieVotePanel;
 
-},{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":78,"react":"react"}],56:[function(require,module,exports){
+},{"../../actions/FormActions":38,"../../actions/MovieActions":39,"../../stores/FormStore":79,"react":"react"}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15938,7 +15998,7 @@ var Form = function (_React$Component) {
 
 exports.default = Form;
 
-},{"react":"react"}],57:[function(require,module,exports){
+},{"react":"react"}],58:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15995,7 +16055,7 @@ var RadioElement = function (_React$Component) {
 
 exports.default = RadioElement;
 
-},{"react":"react"}],58:[function(require,module,exports){
+},{"react":"react"}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16046,7 +16106,7 @@ var RadioGroup = function (_React$Component) {
 
 exports.default = RadioGroup;
 
-},{"react":"react"}],59:[function(require,module,exports){
+},{"react":"react"}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16093,7 +16153,7 @@ var Submit = function (_React$Component) {
 
 exports.default = Submit;
 
-},{"react":"react"}],60:[function(require,module,exports){
+},{"react":"react"}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16162,7 +16222,7 @@ var TextGroup = function (_React$Component) {
 
 exports.default = TextGroup;
 
-},{"react":"react"}],61:[function(require,module,exports){
+},{"react":"react"}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16274,7 +16334,7 @@ var ArticleCommentsPanelForm = function (_React$Component) {
 
 exports.default = ArticleCommentsPanelForm;
 
-},{"../../actions/ArticleActions":35,"../../actions/FormActions":37,"../../stores/FormStore":78,"react":"react"}],62:[function(require,module,exports){
+},{"../../actions/ArticleActions":36,"../../actions/FormActions":38,"../../stores/FormStore":79,"react":"react"}],63:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16307,7 +16367,7 @@ _toastr2.default.options = {
 
 exports.default = _toastr2.default;
 
-},{"toastr":32}],63:[function(require,module,exports){
+},{"toastr":33}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16315,6 +16375,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _localStorage = require('localStorage');
+
+var _localStorage2 = _interopRequireDefault(_localStorage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -16325,43 +16391,46 @@ var Auth = function () {
 
   _createClass(Auth, null, [{
     key: 'setData',
-    value: function setData(key, user) {
-      window.localStorage.setItem(key, JSON.stringify(user));
+    value: function setData(key, data) {
+      _localStorage2.default.setItem(key, data);
     }
   }, {
     key: 'getData',
     value: function getData(key) {
-      var data = window.localStorage.getItem(key);
+      var data = _localStorage2.default.getItem(key);
       if (data) {
-        return JSON.parse(data);
+        return data;
       }
-      return {};
+      return false;
     }
   }, {
-    key: 'removeUser',
-    value: function removeUser() {
-      window.localStorage.removeItem('username');
+    key: 'getDataArray',
+    value: function getDataArray(key) {
+      var data = _localStorage2.default.getItem(key);
+      if (data) {
+        return data.split(',');
+      }
+      return false;
     }
   }, {
     key: 'authenticateUser',
     value: function authenticateUser(token) {
-      window.localStorage.setItem('token', token);
+      this.setData('token', token);
     }
   }, {
     key: 'isUserAuthenticated',
     value: function isUserAuthenticated() {
-      return window.localStorage.getItem('token');
+      return this.getData('token') || '';
     }
   }, {
     key: 'deauthenticateUser',
     value: function deauthenticateUser() {
-      window.localStorage.removeItem('token');
-      this.removeUser();
+      _localStorage2.default.clear();
     }
   }, {
     key: 'getToken',
     value: function getToken() {
-      return window.localStorage.getItem('token');
+      return this.getData('token') || '';
     }
   }]);
 
@@ -16370,7 +16439,7 @@ var Auth = function () {
 
 exports.default = Auth;
 
-},{}],64:[function(require,module,exports){
+},{"localStorage":31}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16497,7 +16566,7 @@ var NavbarUserMenu = function (_React$Component) {
 
 exports.default = NavbarUserMenu;
 
-},{"../../actions/UserActions":40,"../../stores/UserStore":80,"react":"react","react-router":"react-router"}],65:[function(require,module,exports){
+},{"../../actions/UserActions":41,"../../stores/UserStore":81,"react":"react","react-router":"react-router"}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16544,14 +16613,13 @@ var UserProfileInfo = function (_React$Component) {
           );
         });
       }
-
       return _react2.default.createElement(
         'div',
         { className: 'container profile-container' },
         _react2.default.createElement(
           'div',
           { className: 'profile-img' },
-          _react2.default.createElement('img', { src: '/images/user-default.png' })
+          _react2.default.createElement('img', { src: this.props.picture })
         ),
         _react2.default.createElement(
           'div',
@@ -16586,7 +16654,7 @@ var UserProfileInfo = function (_React$Component) {
 
 exports.default = UserProfileInfo;
 
-},{"react":"react"}],66:[function(require,module,exports){
+},{"react":"react"}],67:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16654,7 +16722,12 @@ var UserLogin = function (_React$Component) {
     value: function onChange(state) {
       if (state.relocate) {
         _ShowPopupMessage2.default.success(state.message);
-        this.props.history.push(state.relocate);
+        var relocate = state.relocate;
+
+        state['relocate'] = '';
+        this.setState(state);
+
+        this.props.history.push(relocate);
       } else {
         this.setState(state);
       }
@@ -16741,7 +16814,7 @@ var UserLogin = function (_React$Component) {
 
 exports.default = UserLogin;
 
-},{"../../actions/FormActions":37,"../../actions/UserActions":40,"../../stores/FormStore":78,"../form/Form":56,"../form/Submit":59,"../form/TextGroup":60,"../sub-components/ShowPopupMessage":62,"react":"react"}],67:[function(require,module,exports){
+},{"../../actions/FormActions":38,"../../actions/UserActions":41,"../../stores/FormStore":79,"../form/Form":57,"../form/Submit":60,"../form/TextGroup":61,"../sub-components/ShowPopupMessage":63,"react":"react"}],68:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16798,7 +16871,7 @@ var UserLogout = function (_Component) {
 
 exports.default = UserLogout;
 
-},{"./../../actions/UserActions":40,"./../sub-components/ShowPopupMessage":62,"react":"react"}],68:[function(require,module,exports){
+},{"./../../actions/UserActions":41,"./../sub-components/ShowPopupMessage":63,"react":"react"}],69:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16867,27 +16940,41 @@ var UserProfile = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var nodes = {};
-      nodes.roles = this.state.roles.map(function (role, index) {
+      if (Array.isArray(this.state.roles)) {
+        nodes.roles = this.state.roles.map(function (role, index) {
+          return _react2.default.createElement(
+            'h4',
+            { key: index, className: 'lead' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              role
+            )
+          );
+        });
+      }
+
+      var userInfo = function userInfo() {
         return _react2.default.createElement(
-          'h4',
-          { key: index, className: 'lead' },
-          _react2.default.createElement(
-            'strong',
-            null,
-            role
-          )
+          'div',
+          null,
+          _react2.default.createElement(_UserInfo2.default, { name: _this2.state.name,
+            roles: _this2.state.roles,
+            information: _this2.state.information,
+            picture: _this2.state.picture || '/images/user-default.png'
+          }),
+          _react2.default.createElement(_UserRatedMovies2.default, { votes: _this2.state.votes }),
+          _react2.default.createElement(_UserReviews2.default, { reviews: _this2.props.reviews })
         );
-      });
+      };
 
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_UserInfo2.default, { name: this.state.name,
-          roles: this.state.roles,
-          information: this.state.information }),
-        _react2.default.createElement(_UserRatedMovies2.default, { votes: this.state.votes }),
-        _react2.default.createElement(_UserReviews2.default, { reviews: this.props.reviews })
+        this.state.loggedInUserId ? userInfo() : ''
       );
     }
   }]);
@@ -16897,7 +16984,7 @@ var UserProfile = function (_React$Component) {
 
 exports.default = UserProfile;
 
-},{"../../stores/UserStore":80,"./UserInfo":65,"./UserRatedMovies":69,"./UserReviews":72,"react":"react"}],69:[function(require,module,exports){
+},{"../../stores/UserStore":81,"./UserInfo":66,"./UserRatedMovies":70,"./UserReviews":73,"react":"react"}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16989,7 +17076,7 @@ var UserVotedMovies = function (_React$Component) {
 
 exports.default = UserVotedMovies;
 
-},{"./UserRatedMoviesPanel":70,"react":"react"}],70:[function(require,module,exports){
+},{"./UserRatedMoviesPanel":71,"react":"react"}],71:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17039,7 +17126,7 @@ var UserVotedMoviesPanel = function (_React$Component) {
 
 exports.default = UserVotedMoviesPanel;
 
-},{"../depricated/MovieCard":50,"react":"react"}],71:[function(require,module,exports){
+},{"../depricated/MovieCard":51,"react":"react"}],72:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17114,7 +17201,12 @@ var UserRegister = function (_React$Component) {
     value: function onChange(state) {
       if (state.relocate) {
         _ShowPopupMessage2.default.success(state.message);
-        this.props.history.push(state.relocate);
+        var relocate = state.relocate;
+
+        state['relocate'] = '';
+        this.setState(state);
+
+        this.props.history.push(relocate);
       } else {
         this.setState(state);
       }
@@ -17140,6 +17232,7 @@ var UserRegister = function (_React$Component) {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         age: this.state.age,
+        picture: this.state.picture,
         gender: this.state.gender
       };
       if (!data.username) {
@@ -17198,6 +17291,10 @@ var UserRegister = function (_React$Component) {
               label: 'Age',
               handleChange: _FormActions2.default.handleAgeChange,
               value: this.state.age }),
+            _react2.default.createElement(_TextGroup2.default, { type: 'url',
+              label: 'Profile Picture(link)',
+              handleChange: _FormActions2.default.handleLastPictureChange,
+              value: this.state.picture }),
             _react2.default.createElement(
               _RadioGroup2.default,
               { validationState: this.state.genderValidationState,
@@ -17227,7 +17324,7 @@ var UserRegister = function (_React$Component) {
 
 exports.default = UserRegister;
 
-},{"../../actions/FormActions":37,"../../actions/UserActions":40,"../../stores/FormStore":78,"../form/Form":56,"../form/RadioElement":57,"../form/RadioGroup":58,"../form/Submit":59,"../form/TextGroup":60,"../sub-components/ShowPopupMessage":62,"react":"react"}],72:[function(require,module,exports){
+},{"../../actions/FormActions":38,"../../actions/UserActions":41,"../../stores/FormStore":79,"../form/Form":57,"../form/RadioElement":58,"../form/RadioGroup":59,"../form/Submit":60,"../form/TextGroup":61,"../sub-components/ShowPopupMessage":63,"react":"react"}],73:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17319,7 +17416,7 @@ var UserReviews = function (_React$Component) {
 
 exports.default = UserReviews;
 
-},{"./UserReviewsPanel":73,"react":"react"}],73:[function(require,module,exports){
+},{"./UserReviewsPanel":74,"react":"react"}],74:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17369,7 +17466,7 @@ var UserReviewsPanel = function (_React$Component) {
 
 exports.default = UserReviewsPanel;
 
-},{"react":"react"}],74:[function(require,module,exports){
+},{"react":"react"}],75:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -17402,7 +17499,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _routes2.default
 ), document.getElementById('app'));
 
-},{"./routes":75,"history/lib/createBrowserHistory":20,"react":"react","react-dom":"react-dom","react-router":"react-router"}],75:[function(require,module,exports){
+},{"./routes":76,"history/lib/createBrowserHistory":20,"react":"react","react-dom":"react-dom","react-router":"react-router"}],76:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17470,7 +17567,7 @@ exports.default = _react2.default.createElement(
   _react2.default.createElement(_reactRouter.Route, { path: '/article/:id', component: _ArticleDetailsPage2.default })
 );
 
-},{"./components/App":42,"./components/Home":44,"./components/article/ArticleDetailsPage":47,"./components/article/CreateArticlePage":48,"./components/category/CategoryAddPage":49,"./components/user/UserLogin":66,"./components/user/UserLogout":67,"./components/user/UserProfile":68,"./components/user/UserRegister":71,"./utilities/Authorize":81,"react":"react","react-router":"react-router"}],76:[function(require,module,exports){
+},{"./components/App":43,"./components/Home":45,"./components/article/ArticleDetailsPage":48,"./components/article/CreateArticlePage":49,"./components/category/CategoryAddPage":50,"./components/user/UserLogin":67,"./components/user/UserLogout":68,"./components/user/UserProfile":69,"./components/user/UserRegister":72,"./utilities/Authorize":82,"react":"react","react-router":"react-router"}],77:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17559,7 +17656,7 @@ var ArticleStore = function () {
 
 exports.default = _alt2.default.createStore(ArticleStore);
 
-},{"../actions/ArticleActions":35,"../alt":41}],77:[function(require,module,exports){
+},{"../actions/ArticleActions":36,"../alt":42}],78:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17613,7 +17710,7 @@ var CategoryStore = function () {
 
 exports.default = _alt2.default.createStore(CategoryStore);
 
-},{"../actions/CategoryActions":36,"../alt":41}],78:[function(require,module,exports){
+},{"../actions/CategoryActions":37,"../alt":42}],79:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17634,10 +17731,6 @@ var _UserActions = require('../actions/UserActions');
 
 var _UserActions2 = _interopRequireDefault(_UserActions);
 
-var _MovieActions = require('../actions/MovieActions');
-
-var _MovieActions2 = _interopRequireDefault(_MovieActions);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17651,10 +17744,7 @@ var FormStore = function () {
       onRegisterUserFail: _UserActions2.default.registerUserFail,
       onRegisterUserSuccess: _UserActions2.default.registerUserSuccess,
       onLoginUserSuccess: _UserActions2.default.loginUserSuccess,
-      onLoginUserFail: _UserActions2.default.loginUserFail,
-      onAddCommentFail: _MovieActions2.default.addCommentFail,
-      onAddVoteSuccess: _MovieActions2.default.addVoteSuccess,
-      onAddVoteFail: _MovieActions2.default.addVoteFail
+      onLoginUserFail: _UserActions2.default.loginUserFail
     });
 
     this.username = '';
@@ -17663,6 +17753,7 @@ var FormStore = function () {
     this.firstName = '';
     this.lastName = '';
     this.age = '';
+    this.picture = '';
     this.gender = '';
     this.formSubmitState = '';
     this.usernameValidationState = '';
@@ -17699,7 +17790,6 @@ var FormStore = function () {
   }, {
     key: 'onRegisterUserSuccess',
     value: function onRegisterUserSuccess(data) {
-      console.log(data);
       console.log('FormStore register success');
       this.formSubmitState = 'has-success';
       this.usernameValidationState = '';
@@ -17762,6 +17852,11 @@ var FormStore = function () {
       this.lastName = e.target.value;
     }
   }, {
+    key: 'handleLastPictureChange',
+    value: function handleLastPictureChange(e) {
+      this.picture = e.target.value;
+    }
+  }, {
     key: 'onHandleAgeChange',
     value: function onHandleAgeChange(e) {
       this.age = e.target.value;
@@ -17818,7 +17913,7 @@ var FormStore = function () {
 
 exports.default = _alt2.default.createStore(FormStore);
 
-},{"../actions/FormActions":37,"../actions/MovieActions":38,"../actions/UserActions":40,"../alt":41}],79:[function(require,module,exports){
+},{"../actions/FormActions":38,"../actions/UserActions":41,"../alt":42}],80:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17860,7 +17955,7 @@ var NavbarStore = function () {
 
 exports.default = _alt2.default.createStore(NavbarStore);
 
-},{"../actions/NavbarActions":39,"../alt":41}],80:[function(require,module,exports){
+},{"../actions/NavbarActions":40,"../alt":42}],81:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17895,13 +17990,15 @@ var AppStore = function () {
     this.loggedInUserId = '';
     this.username = '';
     this.roles = [];
-    this.on('beforeEach', function (data) {
+    this.on('init', function (data) {
+      //console.log('test')
       if (_Auth2.default.isUserAuthenticated() && !_this.loggedInUserId) {
-        //maybe serialize
+        //console.log('auth me')
+        //maybe serialize the whole state?
         _this.loggedInUserId = _Auth2.default.getToken();
-        _this.username = _Auth2.default.getData('username');
-        _this.roles = _Auth2.default.getData('roles');
-        _this.emitChange();
+        _this.username = _Auth2.default.getData('username') || '';
+        _this.roles = _Auth2.default.getDataArray('roles') || [];
+        //this.emitChange();
       }
     });
   }
@@ -17938,7 +18035,7 @@ var AppStore = function () {
 
 exports.default = _alt2.default.createStore(AppStore);
 
-},{"../actions/UserActions":40,"../alt":41,"../components/user/Auth":63}],81:[function(require,module,exports){
+},{"../actions/UserActions":41,"../alt":42,"../components/user/Auth":64}],82:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18050,7 +18147,8 @@ var Concealer = exports.Concealer = function (_React$Component2) {
     key: 'render',
     value: function render() {
       var ChildComponent = this.props.ChildComponent;
-
+      console.log('auze state');
+      console.log(this.state);
       return this.state.loggedInUserId ? _react2.default.createElement(ChildComponent, this.props) : null;
     }
   }]);
@@ -18058,7 +18156,7 @@ var Concealer = exports.Concealer = function (_React$Component2) {
   return Concealer;
 }(_react2.default.Component);
 
-},{"../actions/FormActions":37,"../stores/UserStore":80,"react":"react"}],82:[function(require,module,exports){
+},{"../actions/FormActions":38,"../stores/UserStore":81,"react":"react"}],83:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18094,7 +18192,7 @@ var Helpers = function () {
 
 exports.default = Helpers;
 
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18152,6 +18250,6 @@ var RequesterTMDB = function () {
 
 exports.default = RequesterTMDB;
 
-},{}]},{},[74])
+},{}]},{},[75])
 
 //# sourceMappingURL=bundle.js.map
