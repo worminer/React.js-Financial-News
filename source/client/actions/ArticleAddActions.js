@@ -8,8 +8,8 @@ class ArticleAddActions {
       'handleGenresChange',
       'nameValidationFail',
       'genresValidationFail',
-      'addMovieSuccess',
-      'addMovieFail'
+      'addArticleSuccess',
+      'addArticleFail'
     )
   }
 

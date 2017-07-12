@@ -1,9 +1,9 @@
 import React from 'react'
 import FormStore from '../../stores/FormStore'
 import FormActions from '../../actions/FormActions'
-import MovieActions from '../../actions/MovieActions'
+import ArticleActions from '../../actions/ArticleActions'
 
-export default class MovieCommentsPanelForm extends React.Component {
+export default class ArticleCommentsPanelForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = FormStore.getState()
@@ -30,7 +30,7 @@ export default class MovieCommentsPanelForm extends React.Component {
       return
     }
 
-    MovieActions.addComment(this.props.movieId, this.state.comment)
+    ArticleActions.addComment(this.props.articleId, this.state.comment)
   }
 
   render () {

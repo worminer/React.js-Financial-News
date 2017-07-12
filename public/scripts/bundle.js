@@ -16183,9 +16183,9 @@ var _FormActions = require('../../actions/FormActions');
 
 var _FormActions2 = _interopRequireDefault(_FormActions);
 
-var _MovieActions = require('../../actions/MovieActions');
+var _ArticleActions = require('../../actions/ArticleActions');
 
-var _MovieActions2 = _interopRequireDefault(_MovieActions);
+var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16195,20 +16195,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MovieCommentsPanelForm = function (_React$Component) {
-  _inherits(MovieCommentsPanelForm, _React$Component);
+var ArticleCommentsPanelForm = function (_React$Component) {
+  _inherits(ArticleCommentsPanelForm, _React$Component);
 
-  function MovieCommentsPanelForm(props) {
-    _classCallCheck(this, MovieCommentsPanelForm);
+  function ArticleCommentsPanelForm(props) {
+    _classCallCheck(this, ArticleCommentsPanelForm);
 
-    var _this = _possibleConstructorReturn(this, (MovieCommentsPanelForm.__proto__ || Object.getPrototypeOf(MovieCommentsPanelForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ArticleCommentsPanelForm.__proto__ || Object.getPrototypeOf(ArticleCommentsPanelForm)).call(this, props));
 
     _this.state = _FormStore2.default.getState();
     _this.onChange = _this.onChange.bind(_this);
     return _this;
   }
 
-  _createClass(MovieCommentsPanelForm, [{
+  _createClass(ArticleCommentsPanelForm, [{
     key: 'onChange',
     value: function onChange(state) {
       this.setState(state);
@@ -16233,7 +16233,7 @@ var MovieCommentsPanelForm = function (_React$Component) {
         return;
       }
 
-      _MovieActions2.default.addComment(this.props.movieId, this.state.comment);
+      _ArticleActions2.default.addComment(this.props.articleId, this.state.comment);
     }
   }, {
     key: 'render',
@@ -16269,12 +16269,12 @@ var MovieCommentsPanelForm = function (_React$Component) {
     }
   }]);
 
-  return MovieCommentsPanelForm;
+  return ArticleCommentsPanelForm;
 }(_react2.default.Component);
 
-exports.default = MovieCommentsPanelForm;
+exports.default = ArticleCommentsPanelForm;
 
-},{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":78,"react":"react"}],62:[function(require,module,exports){
+},{"../../actions/ArticleActions":35,"../../actions/FormActions":37,"../../stores/FormStore":78,"react":"react"}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
