@@ -9,7 +9,7 @@ class MovieAddActions {
       'nameValidationFail',
       'genresValidationFail',
       'addMovieSuccess',
-      'addMovieFail',
+      'addMovieFail'
     )
   }
 
@@ -18,11 +18,11 @@ class MovieAddActions {
       url: '/api/movies/add',
       method: 'POST',
       data: JSON.stringify(data),
-      contentType: 'application/json',
+      contentType: 'application/json'
     }
     $.ajax(request).
-      done(() => this.addMovieSuccess()).
-      fail((err) => this.addMovieFail(err))
+      done(() => this.addMovieSuccess())
+      .fail((err) => this.addMovieFail(err))
 
     return true
   }

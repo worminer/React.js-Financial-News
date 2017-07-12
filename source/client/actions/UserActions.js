@@ -7,7 +7,7 @@ class UserActions {
       'registerUserFail',
       'loginUserSuccess',
       'loginUserFail',
-      'logoutUserSuccess',
+      'logoutUserSuccess'
     )
   }
 
@@ -17,7 +17,7 @@ class UserActions {
       url: '/user/register',
       method: 'post',
       data: JSON.stringify(data),
-      contentType: 'application/json',
+      contentType: 'application/json'
     }
     $.ajax(request).done(() => this.registerUserSuccess()).fail(err => {
       console.log('error', err)
@@ -32,11 +32,11 @@ class UserActions {
       url: '/user/login',
       method: 'post',
       data: JSON.stringify(data),
-      contentType: 'application/json',
+      contentType: 'application/json'
     }
-    $.ajax(request).
-      done(data => this.loginUserSuccess(data)).
-      fail(err => this.loginUserFail(err.responseJSON))
+    $.ajax(request)
+      .done(data => this.loginUserSuccess(data))
+      .fail(err => this.loginUserFail(err.responseJSON))
 
     return true
   }
@@ -44,13 +44,12 @@ class UserActions {
   logoutUser () {
     let request = {
       url: '/user/logout',
-      method: 'post',
+      method: 'post'
     }
     $.ajax(request).done(() => this.logoutUserSuccess())
 
     return true
   }
-
 }
 
 export default alt.createActions(UserActions)

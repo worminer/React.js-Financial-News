@@ -42,7 +42,7 @@ class MovieActions {
           description: movie.description,
           genres: movie.genres,
           votes: movie.votes,
-          score: movie.score,
+          score: movie.score
         }
 
         TMDB.getMoviePoster(movie.name).then(tmdbResponse => {
@@ -69,7 +69,7 @@ class MovieActions {
       url: `/api/movies/${movieId}/comments`,
       method: 'post',
       contentType: 'application/json',
-      data: JSON.stringify({content: comment}),
+      data: JSON.stringify({content: comment})
     }
 
     $.ajax(request).done(data => {
@@ -86,12 +86,12 @@ class MovieActions {
       url: `/api/movies/${movieId}/vote`,
       method: 'post',
       contentType: 'application/json',
-      data: JSON.stringify({score}),
+      data: JSON.stringify({score})
     }
 
     $.ajax(request).then(data => {
-      data.movieId = movieId,
-        this.addVoteSuccess(data)
+      data.movieId = movieId
+      this.addVoteSuccess(data)
     }).fail(err => this.addVoteFail(err.responseJSON))
 
     return true
@@ -104,7 +104,7 @@ function getComments (movieId) {
   return new Promise((resolve, reject) => {
     let request = {
       url: `/api/movies/${movieId}/comments`,
-      method: 'get',
+      method: 'get'
     }
 
     $.ajax(request).done(data => resolve(data)).fail(err => reject(err))
@@ -114,7 +114,7 @@ function getComments (movieId) {
 function getLoggedInUserVote (movieId, userId) {
   return new Promise(resolve => {
     let request = {
-      method: 'get',
+      method: 'get'
     }
 
     if (userId) {
