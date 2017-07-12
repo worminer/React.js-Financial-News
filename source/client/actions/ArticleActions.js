@@ -67,6 +67,8 @@ class ArticleActions {
     $.ajax(request).done(data => {
       this.getByIdSuccess(data)
     })
+
+    return true
   }
 }
 

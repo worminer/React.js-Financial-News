@@ -33,7 +33,7 @@ module.exports = {
   getById: (req, res) => {
     let id = req.params.id
 
-    Article.findOne({_id: id}).populate('creator').populate('category').then(article => {
+    Article.findOne({_id: id}).populate('creator').populate('category').populate('comments').then(article => {
       res.status(200).send(article)
     })
   }

@@ -14,6 +14,7 @@ class ArticleStore {
     this.categories = []
     this.latestNews = []
     this.article = {}
+    this.comments = []
   }
 
   onCreateArticleSuccess () {
@@ -46,6 +47,9 @@ class ArticleStore {
 
   onGetByIdSuccess (article) {
     this.article = article
+    this.creator = article.creator
+    this.category = article.category
+    this.comments = article.comments
   }
 }
 

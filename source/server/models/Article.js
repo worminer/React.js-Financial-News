@@ -7,7 +7,8 @@ let articleSchema = mongoose.Schema({
   likes: {type: mongoose.Schema.Types.Number, default: 0},
   dateCreated: {type: mongoose.Schema.Types.Date, default: Date.now},
   creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-  image: {type: mongoose.Schema.Types.String}
+  image: {type: mongoose.Schema.Types.String},
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 })
 
 let indexFields = {
