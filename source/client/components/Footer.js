@@ -32,10 +32,10 @@ export default class Footer extends React.Component {
         <div className='container'>
           <div className='row'>
             <div className='col-sm-5'>
-              <h3 className='lead'>
+              <p className='lead'>
                 <strong>Information</strong> and
                 <strong> Copyright</strong>
-              </h3>
+              </p>
               <p>
                 Powered by
                 <strong> Express</strong>,
@@ -45,15 +45,15 @@ export default class Footer extends React.Component {
               <p>© 2017 Financial News.</p>
             </div>
             <div className='col-sm-4 hidden-xs'>
-              <h3 className='lead'>
+              <p className='lead'>
                 <strong>Newest</strong> 6 News
-              </h3>
+              </p>
               <ul className='list-inline'>
 
               </ul>
             </div>
             <div className='col-sm-3'>
-              <h3 className='lead'>Team Project</h3>
+              <p className='lead'>Team Project</p>
               <a href='https://github.com/worminer/React.js-Financial-News'>
                 <strong>Cal Poli green</strong>
               </a>

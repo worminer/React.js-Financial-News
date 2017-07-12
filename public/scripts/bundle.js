@@ -14334,7 +14334,7 @@ var Footer = function (_React$Component) {
               'div',
               { className: 'col-sm-5' },
               _react2.default.createElement(
-                'h3',
+                'p',
                 { className: 'lead' },
                 _react2.default.createElement(
                   'strong',
@@ -14380,7 +14380,7 @@ var Footer = function (_React$Component) {
               'div',
               { className: 'col-sm-4 hidden-xs' },
               _react2.default.createElement(
-                'h3',
+                'p',
                 { className: 'lead' },
                 _react2.default.createElement(
                   'strong',
@@ -14395,7 +14395,7 @@ var Footer = function (_React$Component) {
               'div',
               { className: 'col-sm-3' },
               _react2.default.createElement(
-                'h3',
+                'p',
                 { className: 'lead' },
                 'Team Project'
               ),
