@@ -46,18 +46,32 @@ export default class CategoryAddPage extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)} >
-        <div className='form-group'>
-          <label className='control-label'>Name</label>
-          <input
-            type='text'
-            name='name'
-            required
-            onChange={CategoryActions.handleNameChange}
-            value={this.state.name} />
+      <div className='container'>
+        <div className='row flipInX animated'>
+          <div className='container'>
+            <div className='col-md-6 col-md-offset-3'>
+              <div className='panel panel-default'>
+                <div className='panel-heading'>Add new category</div>
+                <div className='panel-body'>
+                  <form onSubmit={this.handleSubmit.bind(this)} >
+                    <div className='form-group'>
+                      <label className='control-label'>Name</label>
+                      <input
+                        type='text'
+                        name='name'
+                        required
+                        className='form-control'
+                        onChange={CategoryActions.handleNameChange}
+                        value={this.state.name} />
+                    </div>
+                    <button type='submit' className='btn btn-primary'>Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button type='submit' className='btn btn-primary'>Submit</button>
-      </form>
+      </div>
     )
   }
 }
