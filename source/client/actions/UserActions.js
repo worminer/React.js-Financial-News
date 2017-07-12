@@ -11,7 +11,6 @@ class UserActions {
     )
   }
 
-
   registerUser (data) {
     let request = {
       url: '/user/register',

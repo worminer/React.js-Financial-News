@@ -1,5 +1,5 @@
 import alt from '../alt'
-import TMDB from '../utilities/RequesterTMDB'
+// import TMDB from '../utilities/RequesterTMDB'
 
 class MovieActions {
   constructor () {
@@ -13,14 +13,14 @@ class MovieActions {
       'addCommentSuccess',
       'addCommentFail',
       'addVoteSuccess',
-      'addVoteFail',
+      'addVoteFail'
     )
   }
 
   getFiveRecentMovies () {
     let request = {
       method: 'get',
-      url: '/api/movies/five-recent',
+      url: '/api/movies/five-recent'
     }
     $.ajax(request).done(data => this.getFiveRecentMoviesSuccess(data))
 
@@ -30,7 +30,7 @@ class MovieActions {
   getTopTenMovies () {
     let request = {
       url: '/api/movies/top-ten',
-      method: 'get',
+      method: 'get'
     }
 
     $.ajax(request).done(payload => {
