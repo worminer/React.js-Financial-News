@@ -8,6 +8,13 @@ class AppStore {
     this.loggedInUserId = ''
     this.username = ''
     this.roles = []
+    this.picture = ''
+    this.firstName = ''
+    this.lastName = ''
+    this.age = ''
+    this.gender = ''
+
+    
     this.on('init', (data) => {
       //console.log('test')
       if (Auth.isUserAuthenticated() && !this.loggedInUserId) {
@@ -16,18 +23,34 @@ class AppStore {
         this.loggedInUserId = Auth.getToken()
         this.username = Auth.getData('username') || ''
         this.roles = Auth.getDataArray('roles') || []
+        this.picture = Auth.getData('picture') || ''
+        this.firstName = Auth.getData('firstName') || 'Unknown'
+        this.lastName = Auth.getData('lastName') || 'Unknown'
+        this.age = Auth.getData('age') || 'Unknown'
+        this.gender = Auth.getData('gender') || 'Unknown'
         //this.emitChange();
       }
     });
   }
 
   onLoginUserSuccess (user) {
-
+    console.log(user)
     this.loggedInUserId = user._id
     this.username = user.username
     this.roles = user.roles
-    Auth.setData('username', this.username);
-    Auth.setData('roles', this.roles);
+    this.picture = user.picture
+    this.firstName = user.firstName
+    this.lastName = user.lastName
+    this.age = user.age
+    this.gender = user.gender
+    Auth.setData('username', this.username)
+    Auth.setData('roles', this.roles)
+    Auth.setData('picture', this.picture)
+    Auth.setData('firstName',this.firstName)
+    Auth.setData('lastName',this.lastName)
+    Auth.setData('age',this.age)
+    Auth.setData('gender',this.gender)
+
     Auth.authenticateUser(this.loggedInUserId)
 
   }

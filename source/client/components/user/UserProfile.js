@@ -2,8 +2,6 @@ import React from 'react'
 
 import UserStore from '../../stores/UserStore'
 import UserInfo from './UserInfo'
-import UserVotedMovies from './UserRatedMovies'
-import UserReviews from './UserReviews'
 
 export default class UserProfile extends React.Component {
   constructor (props) {
@@ -39,16 +37,22 @@ export default class UserProfile extends React.Component {
     }
 
     let userInfo = () => {
+      console.log(this.state)
       return (
-        <div>
-          <UserInfo name={ this.state.name }
-                    roles={ this.state.roles }
-                    information={ this.state.information }
-                    picture={this.state.picture || '/images/user-default.png'}
+        
+        <section className="container">
+          <UserInfo
+            name       ={ this.state.name }
+            roles      ={ this.state.roles }
+            information={ this.state.information }
+            picture    ={this.state.picture || '/images/user-default.png'}
+            username   ={this.state.username }
+            firstName  ={this.state.firstName}
+            lastName   ={this.state.lastName }
+            age        ={this.state.age      }
+            gender     ={this.state.gender   }
           />
-          <UserVotedMovies votes={ this.state.votes }/>
-          <UserReviews reviews={ this.props.reviews }/>
-        </div>
+        </section>
       )
     }
 
