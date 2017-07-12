@@ -9,7 +9,8 @@ class ArticleActions {
       'handleImageChange',
       'handleCategoryChange',
       'getAllCategoriesSuccess',
-      'getLatestNewsSuccess'
+      'getLatestNewsSuccess',
+      'getByIdSuccess'
     )
   }
 
@@ -54,6 +55,18 @@ class ArticleActions {
     })
 
     return true
+  }
+
+  getById (id) {
+    let request = {
+      url: `/api/articles/${id}`,
+      method: 'GET',
+      contentType: 'application/json'
+    }
+
+    $.ajax(request).done(data => {
+      this.getByIdSuccess(data)
+    })
   }
 }
 

@@ -28,5 +28,13 @@ module.exports = {
 
   latestNews: (req, res) => {
     Article.find().sort('-dateCreated').limit(6).then(articles => res.status(200).send(articles))
+  },
+
+  getById: (req, res) => {
+    let id = req.params.id
+
+    Article.findOne({_id: id}).populate('creator').populate('category').then(article => {
+      res.status(200).send(article)
+    })
   }
 }

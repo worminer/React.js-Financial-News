@@ -2,6 +2,7 @@ import React from 'react'
 import ArticleStore from '../../stores/ArticleStore'
 import ArticleActions from '../../actions/ArticleActions'
 import ShowMessage from './../sub-components/ShowPopupMessage'
+import alt from '../../alt'
 
 export default class CreateArticlePage extends React.Component {
   constructor (props) {
@@ -21,7 +22,6 @@ export default class CreateArticlePage extends React.Component {
   }
 
   componentDidMount () {
-    console.log('mount')
     ArticleStore.listen(this.onChange)
     ArticleActions.getAllCategories()
   }
@@ -55,6 +55,7 @@ export default class CreateArticlePage extends React.Component {
 
   handleArticleCreation (article) {
     ShowMessage.success(`Article '${this.state.title}' created!`)
+    alt.recycle(ArticleStore)
     this.props.history.push('/articles/all')
   }
 

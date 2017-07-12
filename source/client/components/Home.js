@@ -31,7 +31,7 @@ export default class Home extends React.Component {
     let news = this.state.latestNews.map((article, index) => {
       return (
         <div className='single-article' key={index}>
-          <Link to={`/articles/${article._id}`}>
+          <Link to={`/article/${article._id}`}>
             <img src={article.image} alt='article' />
             <h3>{article.title}</h3>
           </Link>
