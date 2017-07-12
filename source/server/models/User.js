@@ -28,6 +28,9 @@ let userSchema = mongoose.Schema({
   age: {
     type: mongoose.Schema.Types.Number
   },
+  picture: {
+    type: mongoose.Schema.Types.String
+  },
   gender: {
     type: mongoose.Schema.Types.String
   },

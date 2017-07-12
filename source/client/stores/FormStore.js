@@ -1,7 +1,6 @@
 import alt from '../alt'
 import FormActions from '../actions/FormActions'
 import UserActions from '../actions/UserActions'
-import MovieActions from '../actions/MovieActions'
 
 class FormStore {
   constructor () {
@@ -10,10 +9,7 @@ class FormStore {
       onRegisterUserFail: UserActions.registerUserFail,
       onRegisterUserSuccess: UserActions.registerUserSuccess,
       onLoginUserSuccess: UserActions.loginUserSuccess,
-      onLoginUserFail: UserActions.loginUserFail,
-      onAddCommentFail: MovieActions.addCommentFail,
-      onAddVoteSuccess: MovieActions.addVoteSuccess,
-      onAddVoteFail: MovieActions.addVoteFail,
+      onLoginUserFail: UserActions.loginUserFail
     })
 
     this.username = ''
@@ -22,6 +18,7 @@ class FormStore {
     this.firstName = ''
     this.lastName = ''
     this.age = ''
+    this.picture = ''
     this.gender = ''
     this.formSubmitState = ''
     this.usernameValidationState = ''
@@ -53,7 +50,6 @@ class FormStore {
   }
 
   onRegisterUserSuccess (data) {
-    console.log(data)
     console.log('FormStore register success')
     this.formSubmitState = 'has-success'
     this.usernameValidationState = ''
@@ -107,6 +103,10 @@ class FormStore {
 
   onHandleLastNameChange (e) {
     this.lastName = e.target.value
+  }
+
+  handleLastPictureChange (e) {
+    this.picture = e.target.value
   }
 
   onHandleAgeChange (e) {

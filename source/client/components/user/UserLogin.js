@@ -18,7 +18,12 @@ export default class UserLogin extends React.Component {
   onChange (state) {
     if (state.relocate) {
       ShowMessage.success(state.message)
-      this.props.history.push(state.relocate);
+      let relocate = state.relocate;
+
+      state['relocate'] = '';
+      this.setState(state)
+
+      this.props.history.push(relocate);
     } else {
       this.setState(state)
     }

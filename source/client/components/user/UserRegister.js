@@ -19,7 +19,12 @@ export default class UserRegister extends React.Component {
   onChange (state) {
     if (state.relocate) {
       ShowMessage.success(state.message)
-      this.props.history.push(state.relocate);
+      let relocate = state.relocate;
+
+      state['relocate'] = '';
+      this.setState(state)
+
+      this.props.history.push(relocate);
     } else {
       this.setState(state)
     }
@@ -42,6 +47,7 @@ export default class UserRegister extends React.Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       age: this.state.age,
+      picture: this.state.picture,
       gender: this.state.gender,
     }
     if (!data.username) {
@@ -102,6 +108,11 @@ export default class UserRegister extends React.Component {
                        label='Age'
                        handleChange={FormActions.handleAgeChange}
                        value={this.state.age}/>
+
+            <TextGroup type='url'
+                       label='Profile Picture(link)'
+                       handleChange={FormActions.handleLastPictureChange}
+                       value={this.state.picture}/>
 
             <RadioGroup validationState={this.state.genderValidationState}
                         message={this.state.message}>
