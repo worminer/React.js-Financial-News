@@ -1,19 +1,19 @@
 import React from 'react'
 
-import UserRatedArticlesPanel from './UserRatedArticlesPanel'
+import UserRatedMoviesPanel from './UserRatedMoviesPanel'
 
-export default class UserVotedArticles extends React.Component {
+export default class UserVotedMovies extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      showRatedArticlesPanel: false
+      showRatedMoviesPanel: false
     }
   }
 
-  toggleRatedArticles () {
+  toggleRatedMovies () {
     this.setState(prevState => ({
-      showRatedArticlesPanel: !prevState.showRatedArticlesPanel
+      showRatedMoviesPanel: !prevState.showRatedMoviesPanel
     }))
   }
 
@@ -31,12 +31,12 @@ export default class UserVotedArticles extends React.Component {
         </div>
         <div className='pull-right btn-group'>
           <a className='btn btn-primary'
-            onClick={this.toggleRatedArticles.bind(this)}>
-            { this.state.showRatedArticlesPanel ? 'Hide' : 'Rated News' }
+            onClick={this.toggleRatedMovies.bind(this)}>
+            { this.state.showRatedMoviesPanel ? 'Hide' : 'Rated News' }
           </a>
         </div>
-        { this.state.showRatedArticlessPanel
-        ? <UserRatedArticlesPanel articles={this.props.votes} /> : null }
+        { this.state.showRatedMoviessPanel
+        ? <UserRatedMoviesPanel movies={this.props.votes} /> : null }
       </div>
     )
   }
