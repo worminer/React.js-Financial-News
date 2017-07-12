@@ -6,7 +6,7 @@ export default class MovieCommentsPanel extends React.Component {
     let comments = this.props.comments.map(comment => {
       return (
         <div key={comment._id}
-             className='comment col-sm-9 list-group-item animated fadeIn'>
+          className='comment col-sm-9 list-group-item animated fadeIn'>
           <div className='media'>
             <div className='media-body'>
               <p>{comment.content}</p>
@@ -23,7 +23,7 @@ export default class MovieCommentsPanel extends React.Component {
         <div
           className='col-sm-6 col-xs-offset-6 list-group-item animated fadeIn'>
           <div className='media'>
-            <CommentForm movieId={this.props.movieId}/>
+            <CommentForm movieId={this.props.movieId} />
           </div>
         </div>
       </div>

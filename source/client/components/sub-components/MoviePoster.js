@@ -10,7 +10,7 @@ export default class MoviePoster extends React.Component {
     if (this.props.posterUrl) {
       poster = (
         <div className='pull-left thumb-lg'>
-          <img className='media-object' src={ this.props.posterUrl }/>
+          <img className='media-object' src={this.props.posterUrl} />
         </div>
       )
     }
