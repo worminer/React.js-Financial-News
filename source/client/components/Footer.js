@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import MovieActions from '../actions/MovieActions'
-import MovieStore from '../stores/MovieStore'
+import ArticleActions from '../actions/ArticleActions'
+import ArticleStore from '../stores/MovieStore'
 
 export default class Footer extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = MovieStore.getState()
+    this.state = ArticleStore.getState()
 
     this.onChange = this.onChange.bind(this)
   }
@@ -18,17 +18,15 @@ export default class Footer extends React.Component {
   }
 
   componentDidMount () {
-    MovieStore.listen(this.onChange)
+    ArticleStore.listen(this.onChange)
   }
 
   componentWillUnmount () {
-    MovieStore.unlisten(this.onChange)
+    ArticleStore.unlisten(this.onChange)
     clearInterval(this.interval)
   }
 
   render () {
-
-
     return (
       <footer>
         <div className='container'>
@@ -44,18 +42,18 @@ export default class Footer extends React.Component {
                 <strong> MongoDB</strong> and
                 <strong> React</strong>
               </p>
-              <p>© 2017 SoftUni.</p>
+              <p>© 2017 Financial News.</p>
             </div>
             <div className='col-sm-4 hidden-xs'>
               <h3 className='lead'>
-                <strong>Newest</strong> 5 Movies
+                <strong>Newest</strong> 6 News
               </h3>
               <ul className='list-inline'>
 
               </ul>
             </div>
             <div className='col-sm-3'>
-              <h3 className='lead'>Author</h3>
+              <h3 className='lead'>Team Project</h3>
               <a href='https://github.com/worminer/React.js-Financial-News'>
                 <strong>Cal Poli green</strong>
               </a>
