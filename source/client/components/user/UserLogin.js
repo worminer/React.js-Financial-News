@@ -26,6 +26,7 @@ export default class UserLogin extends React.Component {
   
   componentDidMount () {
     FormStore.listen(this.onChange)
+    console.log('login did mount')
   }
 
   componentWillUnmount () {

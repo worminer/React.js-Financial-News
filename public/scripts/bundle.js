@@ -13837,11 +13837,13 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
+var _RequesterTMDB = require('../utilities/RequesterTMDB');
+
+var _RequesterTMDB2 = _interopRequireDefault(_RequesterTMDB);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// import TMDB from '../utilities/RequesterTMDB'
 
 var MovieActions = function () {
   function MovieActions() {
@@ -13894,7 +13896,7 @@ var MovieActions = function () {
               score: movie.score
             };
 
-            TMDB.getMoviePoster(movie.name).then(function (tmdbResponse) {
+            _RequesterTMDB2.default.getMoviePoster(movie.name).then(function (tmdbResponse) {
               movieData.moviePosterUrl = tmdbResponse.posterUrl;
 
               getComments(movie._id).then(function (comments) {
@@ -14014,7 +14016,7 @@ function getLoggedInUserVote(movieId, userId) {
   });
 }
 
-},{"../alt":41}],39:[function(require,module,exports){
+},{"../alt":41,"../utilities/RequesterTMDB":82}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14366,11 +14368,11 @@ var Footer = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'a',
-                { href: 'https://github.com/achobanov' },
+                { href: 'https://github.com/worminer/React.js-Financial-News' },
                 _react2.default.createElement(
                   'strong',
                   null,
-                  ' Alex Chobanov'
+                  'Cal Poli green'
                 )
               )
             )
@@ -14557,11 +14559,6 @@ var Navbar = function (_React$Component) {
       _NavbarStore2.default.unlisten(this.onChange);
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      $('.menuToggle').bootstrapToggle();
-    }
-  }, {
     key: 'render',
     value: function render() {
 
@@ -14711,6 +14708,7 @@ var CreateArticlePage = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      console.log('totaly');
       _ArticleStore2.default.listen(this.onChange);
       _ArticleActions2.default.getAllCategories();
     }
@@ -15939,34 +15937,34 @@ var MovieCommentsPanelForm = function (_React$Component) {
 exports.default = MovieCommentsPanelForm;
 
 },{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":76,"react":"react"}],60:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toastr = require("toastr");
+var _toastr = require('toastr');
 
 var _toastr2 = _interopRequireDefault(_toastr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _toastr2.default.options = {
-  "closeButton": true,
-  "debug": false,
-  "newestOnTop": true,
-  "progressBar": true,
-  "positionClass": "toast-bottom-right",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "3000",
-  "hideDuration": "1000",
-  "timeOut": "10000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
+  'closeButton': true,
+  'debug': false,
+  'newestOnTop': true,
+  'progressBar': true,
+  'positionClass': 'toast-bottom-right',
+  'preventDuplicates': false,
+  'onclick': null,
+  'showDuration': '3000',
+  'hideDuration': '1000',
+  'timeOut': '10000',
+  'extendedTimeOut': '1000',
+  'showEasing': 'swing',
+  'hideEasing': 'linear',
+  'showMethod': 'fadeIn',
+  'hideMethod': 'fadeOut'
 };
 
 exports.default = _toastr2.default;
@@ -16327,6 +16325,7 @@ var UserLogin = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _FormStore2.default.listen(this.onChange);
+      console.log('login did mount');
     }
   }, {
     key: 'componentWillUnmount',
@@ -17854,6 +17853,64 @@ var Helpers = function () {
 }();
 
 exports.default = Helpers;
+
+},{}],82:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var API_KEY = '71aabd79c7082bcacabc96877ac7238b';
+var SEARCH_BASE_URL = 'https://api.themoviedb.org/3/search/movie';
+var POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+var UNVERIFIED_MOVIE_POSTER_URL = '/images/movie-unverified.png';
+var MISSING_DATA_POSTER_URL = '/images/movie-missing-data.jpg';
+
+var RequesterTMDB = function () {
+  function RequesterTMDB() {
+    _classCallCheck(this, RequesterTMDB);
+  }
+
+  _createClass(RequesterTMDB, null, [{
+    key: 'getMoviePoster',
+    value: function getMoviePoster(movieName) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          method: 'get',
+          url: SEARCH_BASE_URL + '?api_key=' + API_KEY + '&query=' + movieName
+        };
+        $.ajax(request).done(function (tmdbResponse) {
+          console.log('TMDB response', tmdbResponse);
+          if (tmdbResponse.total_results === 0) {
+            resolve({ posterUrl: UNVERIFIED_MOVIE_POSTER_URL });
+            return;
+          }
+
+          var posterPath = tmdbResponse.results[0].poster_path;
+          if (posterPath === null) {
+            resolve({ posterUrl: MISSING_DATA_POSTER_URL });
+            return;
+          }
+          resolve({ posterUrl: POSTER_BASE_URL + '/' + posterPath });
+        }).fail(function (err) {
+          reject({
+            clientMessage: 'Request failed',
+            error: err
+          });
+        });
+      });
+    }
+  }]);
+
+  return RequesterTMDB;
+}();
+
+exports.default = RequesterTMDB;
 
 },{}]},{},[72])
 

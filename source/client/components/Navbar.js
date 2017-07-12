@@ -31,10 +31,7 @@ export default class Navbar extends React.Component {
     NavbarStore.unlisten(this.onChange)
   }
 
-  componentDidUpdate()
-  {
-    $('.menuToggle').bootstrapToggle();
-  }
+  
   render () {
 
     return (
