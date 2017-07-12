@@ -14050,7 +14050,7 @@ function getLoggedInUserVote(movieId, userId) {
   });
 }
 
-},{"../alt":41,"../utilities/RequesterTMDB":84}],39:[function(require,module,exports){
+},{"../alt":41,"../utilities/RequesterTMDB":83}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14257,7 +14257,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"../actions/UserActions":40,"../stores/UserStore":81,"./Footer":43,"./Navbar":45,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/UserActions":40,"../stores/UserStore":80,"./Footer":43,"./Navbar":45,"react":"react"}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14276,9 +14276,9 @@ var _ArticleActions = require('../actions/ArticleActions');
 
 var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
-var _MovieStore = require('../stores/MovieStore');
+var _ArticleStore = require('../stores/ArticleStore');
 
-var _MovieStore2 = _interopRequireDefault(_MovieStore);
+var _ArticleStore2 = _interopRequireDefault(_ArticleStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14296,7 +14296,7 @@ var Footer = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
 
-    _this.state = _MovieStore2.default.getState();
+    _this.state = _ArticleStore2.default.getState();
 
     _this.onChange = _this.onChange.bind(_this);
     return _this;
@@ -14310,12 +14310,12 @@ var Footer = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _MovieStore2.default.listen(this.onChange);
+      _ArticleStore2.default.listen(this.onChange);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _MovieStore2.default.unlisten(this.onChange);
+      _ArticleStore2.default.unlisten(this.onChange);
       clearInterval(this.interval);
     }
   }, {
@@ -14420,7 +14420,7 @@ var Footer = function (_React$Component) {
 
 exports.default = Footer;
 
-},{"../actions/ArticleActions":35,"../stores/MovieStore":79,"react":"react","react-router":"react-router"}],44:[function(require,module,exports){
+},{"../actions/ArticleActions":35,"../stores/ArticleStore":76,"react":"react","react-router":"react-router"}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14542,7 +14542,7 @@ var Home = function (_React$Component) {
 
 exports.default = Home;
 
-},{"../actions/ArticleActions":35,"../stores/ArticleStore":76,"../utilities/Helpers":83,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
+},{"../actions/ArticleActions":35,"../stores/ArticleStore":76,"../utilities/Helpers":82,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14704,7 +14704,7 @@ var Navbar = function (_React$Component) {
 
 exports.default = Navbar;
 
-},{"../actions/NavbarActions":39,"../stores/NavbarStore":80,"./user/NavbarUserMenu":64,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
+},{"../actions/NavbarActions":39,"../stores/NavbarStore":79,"./user/NavbarUserMenu":64,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14835,7 +14835,7 @@ var ArticleCard = function (_React$Component) {
 
 exports.default = ArticleCard;
 
-},{"../../utilities/Helpers":83,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
+},{"../../utilities/Helpers":82,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15599,7 +15599,7 @@ var MovieInfo = function (_React$Component) {
 
 exports.default = MovieInfo;
 
-},{"../../utilities/Helpers":83,"react":"react","react-router":"react-router"}],53:[function(require,module,exports){
+},{"../../utilities/Helpers":82,"react":"react","react-router":"react-router"}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15687,7 +15687,7 @@ var MoviePanelToggles = function (_React$Component2) {
 
 exports.default = MoviePanelToggles;
 
-},{"../../utilities/Authorize":82,"react":"react","react-router":"react-router"}],54:[function(require,module,exports){
+},{"../../utilities/Authorize":81,"react":"react","react-router":"react-router"}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16497,7 +16497,7 @@ var NavbarUserMenu = function (_React$Component) {
 
 exports.default = NavbarUserMenu;
 
-},{"../../actions/UserActions":40,"../../stores/UserStore":81,"react":"react","react-router":"react-router"}],65:[function(require,module,exports){
+},{"../../actions/UserActions":40,"../../stores/UserStore":80,"react":"react","react-router":"react-router"}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16897,7 +16897,7 @@ var UserProfile = function (_React$Component) {
 
 exports.default = UserProfile;
 
-},{"../../stores/UserStore":81,"./UserInfo":65,"./UserRatedMovies":69,"./UserReviews":72,"react":"react"}],69:[function(require,module,exports){
+},{"../../stores/UserStore":80,"./UserInfo":65,"./UserRatedMovies":69,"./UserReviews":72,"react":"react"}],69:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16976,10 +16976,10 @@ var UserVotedMovies = function (_React$Component) {
             'a',
             { className: 'btn btn-primary',
               onClick: this.toggleRatedMovies.bind(this) },
-            this.state.showRatedMoviesPanel ? 'Hide' : 'Rated Movies'
+            this.state.showRatedMoviesPanel ? 'Hide' : 'Rated News'
           )
         ),
-        this.state.showRatedMoviesPanel ? _react2.default.createElement(_UserRatedMoviesPanel2.default, { movies: this.props.votes }) : null
+        this.state.showRatedMoviessPanel ? _react2.default.createElement(_UserRatedMoviesPanel2.default, { movies: this.props.votes }) : null
       );
     }
   }]);
@@ -17470,7 +17470,7 @@ exports.default = _react2.default.createElement(
   _react2.default.createElement(_reactRouter.Route, { path: '/article/:id', component: _ArticleDetailsPage2.default })
 );
 
-},{"./components/App":42,"./components/Home":44,"./components/article/ArticleDetailsPage":47,"./components/article/CreateArticlePage":48,"./components/category/CategoryAddPage":49,"./components/user/UserLogin":66,"./components/user/UserLogout":67,"./components/user/UserProfile":68,"./components/user/UserRegister":71,"./utilities/Authorize":82,"react":"react","react-router":"react-router"}],76:[function(require,module,exports){
+},{"./components/App":42,"./components/Home":44,"./components/article/ArticleDetailsPage":47,"./components/article/CreateArticlePage":48,"./components/category/CategoryAddPage":49,"./components/user/UserLogin":66,"./components/user/UserLogout":67,"./components/user/UserProfile":68,"./components/user/UserRegister":71,"./utilities/Authorize":81,"react":"react","react-router":"react-router"}],76:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17831,122 +17831,6 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
-var _MovieActions = require('../actions/MovieActions');
-
-var _MovieActions2 = _interopRequireDefault(_MovieActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MovieStore = function () {
-  function MovieStore() {
-    _classCallCheck(this, MovieStore);
-
-    this.bindActions(_MovieActions2.default);
-    this.topTenMovies = [];
-    this.mostRecentMovies = [];
-  }
-
-  _createClass(MovieStore, [{
-    key: 'onAddMovieToTopTen',
-    value: function onAddMovieToTopTen(movie) {
-      this.topTenMovies.push(movie);
-    }
-  }, {
-    key: 'onEmptyTopTenMovies',
-    value: function onEmptyTopTenMovies() {
-      this.topTenMovies = [];
-    }
-  }, {
-    key: 'onGetTopTenMoviesSuccess',
-    value: function onGetTopTenMoviesSuccess(movies) {
-      this.topTenMovies = movies;
-    }
-  }, {
-    key: 'onGetTopTenMoviesFail',
-    value: function onGetTopTenMoviesFail(err) {
-      console.log('Could connect to DB', err);
-    }
-  }, {
-    key: 'onGetFiveRecentMoviesSuccess',
-    value: function onGetFiveRecentMoviesSuccess(data) {
-      this.mostRecentMovies = data;
-    }
-  }, {
-    key: 'onGetFiveRecentMoviesFail',
-    value: function onGetFiveRecentMoviesFail() {
-      console.log('Could not connext to DB');
-    }
-  }, {
-    key: 'onAddCommentSuccess',
-    value: function onAddCommentSuccess(data) {
-      var comment = data.comment;
-      var movieId = data.comment.movie;
-      for (var i = 0, n = this.topTenMovies.length; i < n; i++) {
-        if (this.topTenMovies[i]._id === movieId) {
-          this.topTenMovies[i].comments.unshift(comment);
-        }
-      }
-    }
-  }, {
-    key: 'onAddVoteSuccess',
-    value: function onAddVoteSuccess(data) {
-      var movieId = data.movieId;
-      var loggedInUserScore = data.voteScore;
-      var movieScore = data.movieScore;
-      var movieVotes = data.movieVotes;
-
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = this.topTenMovies[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var movie = _step.value;
-
-          if (movie._id === movieId) {
-            movie.loggedInUserScore = loggedInUserScore;
-            movie.score = movieScore;
-            movie.votes = movieVotes;
-            break;
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-    }
-  }]);
-
-  return MovieStore;
-}();
-
-exports.default = _alt2.default.createStore(MovieStore);
-
-},{"../actions/MovieActions":38,"../alt":41}],80:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _alt = require('../alt');
-
-var _alt2 = _interopRequireDefault(_alt);
-
 var _NavbarActions = require('../actions/NavbarActions');
 
 var _NavbarActions2 = _interopRequireDefault(_NavbarActions);
@@ -17976,7 +17860,7 @@ var NavbarStore = function () {
 
 exports.default = _alt2.default.createStore(NavbarStore);
 
-},{"../actions/NavbarActions":39,"../alt":41}],81:[function(require,module,exports){
+},{"../actions/NavbarActions":39,"../alt":41}],80:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18054,7 +17938,7 @@ var AppStore = function () {
 
 exports.default = _alt2.default.createStore(AppStore);
 
-},{"../actions/UserActions":40,"../alt":41,"../components/user/Auth":63}],82:[function(require,module,exports){
+},{"../actions/UserActions":40,"../alt":41,"../components/user/Auth":63}],81:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18174,7 +18058,7 @@ var Concealer = exports.Concealer = function (_React$Component2) {
   return Concealer;
 }(_react2.default.Component);
 
-},{"../actions/FormActions":37,"../stores/UserStore":81,"react":"react"}],83:[function(require,module,exports){
+},{"../actions/FormActions":37,"../stores/UserStore":80,"react":"react"}],82:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18210,7 +18094,7 @@ var Helpers = function () {
 
 exports.default = Helpers;
 
-},{}],84:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

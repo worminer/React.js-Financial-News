@@ -2,7 +2,7 @@ import React from 'react'
 
 import UserStore from '../../stores/UserStore'
 import UserInfo from './UserInfo'
-import UserVotedArticles from './UserRatedArticles'
+import UserVotedArticles from './UserRatedMovies'
 import UserReviews from './UserReviews'
 
 export default class UserProfile extends React.Component {
