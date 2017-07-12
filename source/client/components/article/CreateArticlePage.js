@@ -21,7 +21,6 @@ export default class CreateArticlePage extends React.Component {
   }
 
   componentDidMount () {
-    console.log('totaly')
     ArticleStore.listen(this.onChange)
     ArticleActions.getAllCategories()
   }

@@ -4,7 +4,7 @@ import FormActions from '../actions/FormActions'
 
 export default function authorize (ChildComponent) {
   return class Authorization extends React.Component {
-    constructor (props) {
+     constructor (props) {
       super(props)
       this.state = UserStore.getState()
       this.onChange = this.onChange.bind(this)
@@ -56,7 +56,8 @@ export class Concealer extends React.Component {
 
   render () {
     let ChildComponent = this.props.ChildComponent
-
+    console.log('auze state')
+    console.log(this.state)
     return this.state.loggedInUserId ? <ChildComponent {...this.props} /> : null
   }
 }

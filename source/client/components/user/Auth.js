@@ -1,34 +1,40 @@
+import localStorage from 'localStorage'
+
+
+
 class Auth {
-  static setData (key, user) {
-    window.localStorage.setItem(key, JSON.stringify(user))
+  static setData (key, data) {
+    localStorage.setItem(key, data)
   }
 
   static getData (key) {
-    const data = window.localStorage.getItem(key)
+    const data = localStorage.getItem(key)
     if (data) {
-      return JSON.parse(data)
+      return data
     }
-    return {}
+    return false
   }
-
-  static removeUser () {
-    window.localStorage.removeItem('username')
+  static getDataArray (key) {
+    const data = localStorage.getItem(key)
+    if (data) {
+      return data.split(',')
+    }
+    return false
   }
   static authenticateUser (token) {
-    window.localStorage.setItem('token', token)
+    this.setData('token', token)
   }
 
   static isUserAuthenticated () {
-    return window.localStorage.getItem('token')
+    return this.getData('token') || ''
   }
 
   static deauthenticateUser () {
-    window.localStorage.removeItem('token')
-    this.removeUser()
+    localStorage.clear()
   }
 
   static getToken () {
-    return window.localStorage.getItem('token')
+    return this.getData('token') || ''
   }
 }
 

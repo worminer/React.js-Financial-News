@@ -8,15 +8,16 @@ class AppStore {
     this.loggedInUserId = ''
     this.username = ''
     this.roles = []
-    this.on('beforeEach', (data) => {
+    this.on('init', (data) => {
+      //console.log('test')
       if (Auth.isUserAuthenticated() && !this.loggedInUserId) {
-        //maybe serialize
+        //console.log('auth me')
+        //maybe serialize the whole state?
         this.loggedInUserId = Auth.getToken()
-        this.username = Auth.getData('username');
-        this.roles = Auth.getData('roles')
-        this.emitChange();
+        this.username = Auth.getData('username') || ''
+        this.roles = Auth.getDataArray('roles') || []
+        //this.emitChange();
       }
-
     });
   }
 

@@ -16,11 +16,10 @@ export default class UserProfileInfo extends React.Component {
         )
       })
     }
-
     return (
       <div className='container profile-container'>
         <div className='profile-img'>
-          <img src='/images/user-default.png'/>
+          <img src={this.props.picture}/>
         </div>
         <div className='profile-info clearfix'>
           <h2><strong>{ this.props.name }</strong></h2>

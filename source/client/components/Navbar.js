@@ -31,9 +31,8 @@ export default class Navbar extends React.Component {
     NavbarStore.unlisten(this.onChange)
   }
 
-  
-  render () {
 
+  render () {
     return (
       <nav className='navbar navbar-default navbar-static-top'>
         <div className='navbar-header'>
