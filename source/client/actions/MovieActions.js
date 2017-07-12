@@ -1,5 +1,5 @@
 import alt from '../alt'
-// import TMDB from '../utilities/RequesterTMDB'
+import TMDB from '../utilities/RequesterTMDB'
 
 class MovieActions {
   constructor () {

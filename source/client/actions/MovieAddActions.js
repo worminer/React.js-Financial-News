@@ -20,8 +20,8 @@ class MovieAddActions {
       data: JSON.stringify(data),
       contentType: 'application/json'
     }
-    $.ajax(request).
-      done(() => this.addMovieSuccess())
+    $.ajax(request)
+      .done(() => this.addMovieSuccess())
       .fail((err) => this.addMovieFail(err))
 
     return true
