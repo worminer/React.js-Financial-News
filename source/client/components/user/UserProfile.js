@@ -2,7 +2,7 @@ import React from 'react'
 
 import UserStore from '../../stores/UserStore'
 import UserInfo from './UserInfo'
-import UserVotedMovies from './UserRatedMovies'
+import UserVotedArticles from './UserRatedArticles'
 import UserReviews from './UserReviews'
 
 export default class UserProfile extends React.Component {
@@ -41,7 +41,7 @@ export default class UserProfile extends React.Component {
         <UserInfo name={ this.state.name }
                   roles={ this.state.roles }
                   information={ this.state.information }/>
-        <UserVotedMovies votes={ this.state.votes }/>
+        <UserVotedArticles votes={ this.state.votes }/>
         <UserReviews reviews={ this.props.reviews }/>
       </div>
     )

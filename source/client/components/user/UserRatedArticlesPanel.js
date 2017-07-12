@@ -1,8 +1,8 @@
 import React from 'react'
 
-import MovieCard from '../depricated/MovieCard'
+import ArticleCard from '../depricated/ArticleCard'
 
-export default class UserVotedMoviesPanel extends React.Component {
+export default class UserVotedArticlesPanel extends React.Component {
   constructor (props) {
     super(props)
   }
@@ -10,7 +10,7 @@ export default class UserVotedMoviesPanel extends React.Component {
   render () {
     return (
       <div className='list-group'>
-        Hello from UserRatedMoviesPanel
+        Hello from UserRatedArticlesPanel
       </div>
     )
   }
