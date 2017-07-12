@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 import ArticleActions from '../actions/ArticleActions'
-import ArticleStore from '../stores/MovieStore'
+import ArticleStore from '../stores/ArticleStore'
 
 export default class Footer extends React.Component {
   constructor (props) {

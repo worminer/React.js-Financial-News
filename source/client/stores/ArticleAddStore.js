@@ -1,34 +1,34 @@
 import alt from '../alt'
-import MovieAddActions from '../actions/MovieAddActions'
+import ArticleAddActions from '../actions/ArticleAddActions'
 import Helpers from '../utilities/Helpers'
 
-class MovieAddStore {
+class ArticleAddStore {
   constructor () {
-    this.bindActions(MovieAddActions)
+    this.bindActions(ArticleAddActions)
 
     this.name = ''
     this.description = ''
     this.genres = []
-    this.moviePosterUrl = ''
+    this.articlePosterUrl = ''
     this.genresValidationState = ''
     this.nameValidationState = ''
     this.helpBlock = ''
   }
 
-  onAddMovieSuccess () {
-    console.log('Added movie!')
+  onAddArticleSuccess () {
+    console.log('Added news!')
   }
 
-  onAddMovieFail (err) {
-    console.log('Failed to add movie', err)
+  onAddArticleFail (err) {
+    console.log('Failed to add news', err)
   }
 
-  onGetMoviePosterSuccess (data) {
-    this.moviePosterUrl = data.posterUrl
+  onGetArticlePosterSuccess (data) {
+    this.articlePosterUrl = data.posterUrl
   }
 
-  onGetMoviePosterFail (err) {
-    console.log('Could not get movie post', err)
+  onGetArticlePosterFail (err) {
+    console.log('Could not get news post', err)
   }
 
   onHandleNameChange (e) {
@@ -57,13 +57,13 @@ class MovieAddStore {
 
   onNameValidationFail () {
     this.nameValidationState = 'has-error'
-    this.helpBlock = 'Enter movie name'
+    this.helpBlock = 'Enter news name'
   }
 
   onGenresValidationFail () {
     this.genresValidationState = 'has-error'
-    this.helpBlock = 'Select atleast one movie genre'
+    this.helpBlock = 'Select atleast one news genre'
   }
 }
 
-export default alt.createStore(MovieAddStore)
+export default alt.createStore(ArticleAddStore)
