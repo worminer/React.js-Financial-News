@@ -496,7 +496,7 @@ var Alt = function () {
 
 exports['default'] = Alt;
 module.exports = exports['default'];
-},{"./actions":1,"./functions":2,"./store":6,"./utils/AltUtils":7,"./utils/StateFunctions":8,"flux":12}],4:[function(require,module,exports){
+},{"./actions":1,"./functions":2,"./store":6,"./utils/AltUtils":7,"./utils/StateFunctions":8,"flux":13}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1431,6 +1431,59 @@ function shim (obj) {
 }
 
 },{}],12:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule invariant
+ */
+
+"use strict";
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var invariant = function (condition, format, a, b, c, d, e, f) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
+}).call(this,require('_process'))
+
+},{"_process":31}],13:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1442,7 +1495,7 @@ function shim (obj) {
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":13}],13:[function(require,module,exports){
+},{"./lib/Dispatcher":14}],14:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -1677,60 +1730,7 @@ var Dispatcher = (function () {
 module.exports = Dispatcher;
 }).call(this,require('_process'))
 
-},{"_process":31,"fbjs/lib/invariant":14}],14:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule invariant
- */
-
-"use strict";
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function (condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-}).call(this,require('_process'))
-
-},{"_process":31}],15:[function(require,module,exports){
+},{"_process":31,"fbjs/lib/invariant":12}],15:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -13707,7 +13707,7 @@ var ArticleActions = function () {
   function ArticleActions() {
     _classCallCheck(this, ArticleActions);
 
-    this.generateActions('createArticleSuccess', 'handleTitleChange', 'handleDescriptionChange', 'handleImageChange', 'handleCategoryChange', 'getAllCategoriesSuccess');
+    this.generateActions('createArticleSuccess', 'handleTitleChange', 'handleDescriptionChange', 'handleImageChange', 'handleCategoryChange', 'getAllCategoriesSuccess', 'getLatestNewsSuccess', 'getByIdSuccess');
   }
 
   _createClass(ArticleActions, [{
@@ -13741,6 +13741,40 @@ var ArticleActions = function () {
 
       $.ajax(request).done(function (data) {
         _this2.getAllCategoriesSuccess(data);
+      });
+
+      return true;
+    }
+  }, {
+    key: 'getLatestNews',
+    value: function getLatestNews() {
+      var _this3 = this;
+
+      var request = {
+        url: '/api/articles/latest',
+        method: 'GET',
+        contentType: 'application/json'
+      };
+
+      $.ajax(request).done(function (data) {
+        _this3.getLatestNewsSuccess(data);
+      });
+
+      return true;
+    }
+  }, {
+    key: 'getById',
+    value: function getById(id) {
+      var _this4 = this;
+
+      var request = {
+        url: '/api/articles/' + id,
+        method: 'GET',
+        contentType: 'application/json'
+      };
+
+      $.ajax(request).done(function (data) {
+        _this4.getByIdSuccess(data);
       });
 
       return true;
@@ -14016,7 +14050,7 @@ function getLoggedInUserVote(movieId, userId) {
   });
 }
 
-},{"../alt":41,"../utilities/RequesterTMDB":82}],39:[function(require,module,exports){
+},{"../alt":41,"../utilities/RequesterTMDB":84}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14223,7 +14257,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"../actions/UserActions":40,"../stores/UserStore":79,"./Footer":43,"./Navbar":45,"react":"react"}],43:[function(require,module,exports){
+},{"../actions/UserActions":40,"../stores/UserStore":81,"./Footer":43,"./Navbar":45,"react":"react"}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14238,9 +14272,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _MovieActions = require('../actions/MovieActions');
+var _ArticleActions = require('../actions/ArticleActions');
 
-var _MovieActions2 = _interopRequireDefault(_MovieActions);
+var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
 var _MovieStore = require('../stores/MovieStore');
 
@@ -14287,7 +14321,6 @@ var Footer = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'footer',
         null,
@@ -14340,7 +14373,7 @@ var Footer = function (_React$Component) {
               _react2.default.createElement(
                 'p',
                 null,
-                '\xA9 2017 SoftUni.'
+                '\xA9 2017 Financial News.'
               )
             ),
             _react2.default.createElement(
@@ -14354,7 +14387,7 @@ var Footer = function (_React$Component) {
                   null,
                   'Newest'
                 ),
-                ' 5 Movies'
+                ' 6 News'
               ),
               _react2.default.createElement('ul', { className: 'list-inline' })
             ),
@@ -14364,7 +14397,7 @@ var Footer = function (_React$Component) {
               _react2.default.createElement(
                 'h3',
                 { className: 'lead' },
-                'Author'
+                'Team Project'
               ),
               _react2.default.createElement(
                 'a',
@@ -14387,7 +14420,7 @@ var Footer = function (_React$Component) {
 
 exports.default = Footer;
 
-},{"../actions/MovieActions":38,"../stores/MovieStore":77,"react":"react","react-router":"react-router"}],44:[function(require,module,exports){
+},{"../actions/ArticleActions":35,"../stores/MovieStore":79,"react":"react","react-router":"react-router"}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14400,17 +14433,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _MovieActions = require('../actions/MovieActions');
+var _ArticleActions = require('../actions/ArticleActions');
 
-var _MovieActions2 = _interopRequireDefault(_MovieActions);
+var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 
-var _MovieStore = require('../stores/MovieStore');
+var _ArticleStore = require('../stores/ArticleStore');
 
-var _MovieStore2 = _interopRequireDefault(_MovieStore);
+var _ArticleStore2 = _interopRequireDefault(_ArticleStore);
 
-var _MovieCard = require('./depricated/MovieCard');
+var _Helpers = require('../utilities/Helpers');
 
-var _MovieCard2 = _interopRequireDefault(_MovieCard);
+var _Helpers2 = _interopRequireDefault(_Helpers);
+
+var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14428,7 +14463,7 @@ var Home = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-    _this.state = _MovieStore2.default.getState();
+    _this.state = _ArticleStore2.default.getState();
 
     _this.onChange = _this.onChange.bind(_this);
     return _this;
@@ -14442,22 +14477,42 @@ var Home = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _MovieStore2.default.listen(this.onChange);
-
-      //MovieActions.getTopTenMovies()
+      _ArticleStore2.default.listen(this.onChange);
+      _ArticleActions2.default.getLatestNews();
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _MovieStore2.default.unlisten(this.onChange);
+      _ArticleStore2.default.unlisten(this.onChange);
     }
   }, {
     key: 'render',
     value: function render() {
-      var movies = this.state.topTenMovies.map(function (movie, index) {
-        return _react2.default.createElement(_MovieCard2.default, { key: movie._id,
-          movie: movie,
-          index: index });
+      var news = this.state.latestNews.map(function (article, index) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'single-article', key: index },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: '/article/' + article._id },
+            _react2.default.createElement('img', { src: article.image, alt: 'article' }),
+            _react2.default.createElement(
+              'h3',
+              null,
+              article.title
+            )
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            _Helpers2.default.formatDate(article.dateCreated)
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            article.description.substr(0, 300)
+          )
+        );
       });
 
       return _react2.default.createElement(
@@ -14470,13 +14525,13 @@ var Home = function (_React$Component) {
           _react2.default.createElement(
             'strong',
             null,
-            ' Movie Database'
+            ' Financial News'
           )
         ),
         _react2.default.createElement(
           'div',
           { className: 'list-group' },
-          movies
+          news
         )
       );
     }
@@ -14487,7 +14542,7 @@ var Home = function (_React$Component) {
 
 exports.default = Home;
 
-},{"../actions/MovieActions":38,"../stores/MovieStore":77,"./depricated/MovieCard":48,"react":"react"}],45:[function(require,module,exports){
+},{"../actions/ArticleActions":35,"../stores/ArticleStore":76,"../utilities/Helpers":83,"react":"react","react-router":"react-router"}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14601,7 +14656,7 @@ var Navbar = function (_React$Component) {
               _react2.default.createElement('div', { className: 'tri' }),
               _react2.default.createElement('div', { className: 'tri invert' })
             ),
-            'MDB'
+            'CPG'
           )
         ),
         _react2.default.createElement(
@@ -14649,7 +14704,138 @@ var Navbar = function (_React$Component) {
 
 exports.default = Navbar;
 
-},{"../actions/NavbarActions":39,"../stores/NavbarStore":78,"./user/NavbarUserMenu":62,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
+},{"../actions/NavbarActions":39,"../stores/NavbarStore":80,"./user/NavbarUserMenu":64,"react":"react","react-router":"react-router"}],46:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _Helpers = require('../../utilities/Helpers');
+
+var _Helpers2 = _interopRequireDefault(_Helpers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ArticleCard = function (_React$Component) {
+  _inherits(ArticleCard, _React$Component);
+
+  function ArticleCard() {
+    _classCallCheck(this, ArticleCard);
+
+    return _possibleConstructorReturn(this, (ArticleCard.__proto__ || Object.getPrototypeOf(ArticleCard)).apply(this, arguments));
+  }
+
+  _createClass(ArticleCard, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'well' },
+          _react2.default.createElement(
+            'div',
+            { className: 'media' },
+            _react2.default.createElement('img', { className: 'media-object pull-left', src: this.props.article.image }),
+            _react2.default.createElement(
+              'div',
+              { className: 'media-body' },
+              _react2.default.createElement(
+                'h4',
+                { className: 'media-heading' },
+                this.props.article.title
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'text-right' },
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/user/profile/' + this.props.creator._id },
+                  this.props.creator.username
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                this.props.article.description
+              ),
+              _react2.default.createElement(
+                'ul',
+                { className: 'list-inline list-unstyled' },
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-calendar' }),
+                    _Helpers2.default.formatDate(this.props.article.dateCreated)
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  '|'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  _react2.default.createElement('i', { className: 'glyphicon glyphicon-comment' }),
+                  ' ',
+                  this.props.comments.length,
+                  ' comments'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  '|'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement('span', { className: 'glyphicon glyphicon-thumbs-up' }),
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    ' ',
+                    this.props.article.likes
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  '|'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ArticleCard;
+}(_react2.default.Component);
+
+exports.default = ArticleCard;
+
+},{"../../utilities/Helpers":83,"react":"react","react-router":"react-router"}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14673,6 +14859,95 @@ var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
 var _ShowPopupMessage = require('./../sub-components/ShowPopupMessage');
 
 var _ShowPopupMessage2 = _interopRequireDefault(_ShowPopupMessage);
+
+var _ArticleCard = require('./ArticleCard');
+
+var _ArticleCard2 = _interopRequireDefault(_ArticleCard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ArticleDetailsPage = function (_React$Component) {
+  _inherits(ArticleDetailsPage, _React$Component);
+
+  function ArticleDetailsPage(props) {
+    _classCallCheck(this, ArticleDetailsPage);
+
+    var _this = _possibleConstructorReturn(this, (ArticleDetailsPage.__proto__ || Object.getPrototypeOf(ArticleDetailsPage)).call(this, props));
+
+    _this.state = _ArticleStore2.default.getState();
+    _this.onChange = _this.onChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(ArticleDetailsPage, [{
+    key: 'onChange',
+    value: function onChange(state) {
+      this.setState(state);
+      if (state.articleCreated) {
+        this.handleArticleCreation();
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _ArticleStore2.default.listen(this.onChange);
+      _ArticleActions2.default.getById(this.props.params.id);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _ArticleStore2.default.unlisten(this.onChange);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      console.log(this.state.article.creator);
+      return _react2.default.createElement(_ArticleCard2.default, { article: this.state.article,
+        comments: this.state.comments,
+        creator: this.state.creator,
+        category: this.state.category });
+    }
+  }]);
+
+  return ArticleDetailsPage;
+}(_react2.default.Component);
+
+exports.default = ArticleDetailsPage;
+
+},{"../../actions/ArticleActions":35,"../../stores/ArticleStore":76,"./../sub-components/ShowPopupMessage":62,"./ArticleCard":46,"react":"react"}],48:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ArticleStore = require('../../stores/ArticleStore');
+
+var _ArticleStore2 = _interopRequireDefault(_ArticleStore);
+
+var _ArticleActions = require('../../actions/ArticleActions');
+
+var _ArticleActions2 = _interopRequireDefault(_ArticleActions);
+
+var _ShowPopupMessage = require('./../sub-components/ShowPopupMessage');
+
+var _ShowPopupMessage2 = _interopRequireDefault(_ShowPopupMessage);
+
+var _alt = require('../../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14708,7 +14983,6 @@ var CreateArticlePage = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('totaly');
       _ArticleStore2.default.listen(this.onChange);
       _ArticleActions2.default.getAllCategories();
     }
@@ -14745,6 +15019,7 @@ var CreateArticlePage = function (_React$Component) {
     key: 'handleArticleCreation',
     value: function handleArticleCreation(article) {
       _ShowPopupMessage2.default.success('Article \'' + this.state.title + '\' created!');
+      _alt2.default.recycle(_ArticleStore2.default);
       this.props.history.push('/articles/all');
     }
   }, {
@@ -14759,75 +15034,104 @@ var CreateArticlePage = function (_React$Component) {
       });
 
       return _react2.default.createElement(
-        'form',
-        { onSubmit: this.handleSubmit.bind(this) },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
           'div',
-          { className: 'form-group' },
+          { className: 'row flipInX animated' },
           _react2.default.createElement(
-            'label',
-            { className: 'control-label' },
-            'Title'
-          ),
-          _react2.default.createElement('input', { type: 'text',
-            className: 'form-control',
-            value: this.state.title,
-            onChange: _ArticleActions2.default.handleTitleChange })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            { className: 'control-label' },
-            'Description'
-          ),
-          _react2.default.createElement('textarea', {
-            className: 'form-control',
-            rows: '5',
-            value: this.state.description,
-            onChange: _ArticleActions2.default.handleDescriptionChange })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            { className: 'control-label' },
-            'Category'
-          ),
-          _react2.default.createElement(
-            'select',
-            {
-              className: 'form-control',
-              value: this.state.category,
-              onChange: _ArticleActions2.default.handleCategoryChange,
-              required: true },
+            'div',
+            { className: 'container' },
             _react2.default.createElement(
-              'option',
-              { disabled: true },
-              'Select a category'
-            ),
-            categories
+              'div',
+              { className: 'col-md-6 col-md-offset-3' },
+              _react2.default.createElement(
+                'div',
+                { className: 'panel panel-default' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'panel-heading' },
+                  'Add new article'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'panel-body' },
+                  _react2.default.createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit.bind(this) },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group' },
+                      _react2.default.createElement(
+                        'label',
+                        { className: 'control-label' },
+                        'Title'
+                      ),
+                      _react2.default.createElement('input', { type: 'text',
+                        className: 'form-control',
+                        value: this.state.title,
+                        onChange: _ArticleActions2.default.handleTitleChange })
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group' },
+                      _react2.default.createElement(
+                        'label',
+                        { className: 'control-label' },
+                        'Description'
+                      ),
+                      _react2.default.createElement('textarea', {
+                        className: 'form-control',
+                        rows: '5',
+                        value: this.state.description,
+                        onChange: _ArticleActions2.default.handleDescriptionChange })
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group' },
+                      _react2.default.createElement(
+                        'label',
+                        { className: 'control-label' },
+                        'Category'
+                      ),
+                      _react2.default.createElement(
+                        'select',
+                        {
+                          className: 'form-control',
+                          value: this.state.category,
+                          onChange: _ArticleActions2.default.handleCategoryChange,
+                          required: true },
+                        _react2.default.createElement(
+                          'option',
+                          { disabled: true },
+                          'Select a category'
+                        ),
+                        categories
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group' },
+                      _react2.default.createElement(
+                        'label',
+                        { className: 'control-label' },
+                        'Image'
+                      ),
+                      _react2.default.createElement('input', { type: 'url',
+                        className: 'form-control',
+                        value: this.state.image,
+                        onChange: _ArticleActions2.default.handleImageChange })
+                    ),
+                    _react2.default.createElement(
+                      'button',
+                      { type: 'submit', className: 'btn btn-primary' },
+                      'Submit'
+                    )
+                  )
+                )
+              )
+            )
           )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            { className: 'control-label' },
-            'Image'
-          ),
-          _react2.default.createElement('input', { type: 'url',
-            className: 'form-control',
-            value: this.state.image,
-            onChange: _ArticleActions2.default.handleImageChange })
-        ),
-        _react2.default.createElement(
-          'button',
-          { type: 'submit', className: 'btn btn-primary' },
-          'Submit'
         )
       );
     }
@@ -14838,7 +15142,7 @@ var CreateArticlePage = function (_React$Component) {
 
 exports.default = CreateArticlePage;
 
-},{"../../actions/ArticleActions":35,"../../stores/ArticleStore":74,"./../sub-components/ShowPopupMessage":60,"react":"react"}],47:[function(require,module,exports){
+},{"../../actions/ArticleActions":35,"../../alt":41,"../../stores/ArticleStore":76,"./../sub-components/ShowPopupMessage":62,"react":"react"}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14862,6 +15166,10 @@ var _CategoryActions2 = _interopRequireDefault(_CategoryActions);
 var _ShowPopupMessage = require('./../sub-components/ShowPopupMessage');
 
 var _ShowPopupMessage2 = _interopRequireDefault(_ShowPopupMessage);
+
+var _alt = require('../../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14917,35 +15225,65 @@ var CategoryAddPage = function (_React$Component) {
   }, {
     key: 'handleCategoryCreation',
     value: function handleCategoryCreation(category) {
-      console.log('create');
       _ShowPopupMessage2.default.success('Category \'' + this.state.name + '\' created!');
+      _alt2.default.recycle(_CategoryStore2.default);
       this.props.history.push('/categories/all');
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'form',
-        { onSubmit: this.handleSubmit.bind(this) },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
           'div',
-          { className: 'form-group' },
+          { className: 'row flipInX animated' },
           _react2.default.createElement(
-            'label',
-            { className: 'control-label' },
-            'Name'
-          ),
-          _react2.default.createElement('input', {
-            type: 'text',
-            name: 'name',
-            required: true,
-            onChange: _CategoryActions2.default.handleNameChange,
-            value: this.state.name })
-        ),
-        _react2.default.createElement(
-          'button',
-          { type: 'submit', className: 'btn btn-primary' },
-          'Submit'
+            'div',
+            { className: 'container' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-md-6 col-md-offset-3' },
+              _react2.default.createElement(
+                'div',
+                { className: 'panel panel-default' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'panel-heading' },
+                  'Add new category'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'panel-body' },
+                  _react2.default.createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit.bind(this) },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group' },
+                      _react2.default.createElement(
+                        'label',
+                        { className: 'control-label' },
+                        'Name'
+                      ),
+                      _react2.default.createElement('input', {
+                        type: 'text',
+                        name: 'name',
+                        required: true,
+                        className: 'form-control',
+                        onChange: _CategoryActions2.default.handleNameChange,
+                        value: this.state.name })
+                    ),
+                    _react2.default.createElement(
+                      'button',
+                      { type: 'submit', className: 'btn btn-primary' },
+                      'Submit'
+                    )
+                  )
+                )
+              )
+            )
+          )
         )
       );
     }
@@ -14956,7 +15294,7 @@ var CategoryAddPage = function (_React$Component) {
 
 exports.default = CategoryAddPage;
 
-},{"../../actions/CategoryActions":36,"../../stores/CategoryStore":75,"./../sub-components/ShowPopupMessage":60,"react":"react"}],48:[function(require,module,exports){
+},{"../../actions/CategoryActions":36,"../../alt":41,"../../stores/CategoryStore":77,"./../sub-components/ShowPopupMessage":62,"react":"react"}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15068,7 +15406,7 @@ var MovieCard = function (_React$Component) {
 
 exports.default = MovieCard;
 
-},{"./MovieCommentsPanel":49,"./MovieInfo":50,"./MoviePanelsToggle":51,"./MoviePoster":52,"./MovieVotePanel":53,"react":"react"}],49:[function(require,module,exports){
+},{"./MovieCommentsPanel":51,"./MovieInfo":52,"./MoviePanelsToggle":53,"./MoviePoster":54,"./MovieVotePanel":55,"react":"react"}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15154,7 +15492,7 @@ var MovieCommentsPanel = function (_React$Component) {
 
 exports.default = MovieCommentsPanel;
 
-},{"../sub-components/CommentForm":59,"react":"react"}],50:[function(require,module,exports){
+},{"../sub-components/CommentForm":61,"react":"react"}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15261,7 +15599,7 @@ var MovieInfo = function (_React$Component) {
 
 exports.default = MovieInfo;
 
-},{"../../utilities/Helpers":81,"react":"react","react-router":"react-router"}],51:[function(require,module,exports){
+},{"../../utilities/Helpers":83,"react":"react","react-router":"react-router"}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15349,7 +15687,7 @@ var MoviePanelToggles = function (_React$Component2) {
 
 exports.default = MoviePanelToggles;
 
-},{"../../utilities/Authorize":80,"react":"react","react-router":"react-router"}],52:[function(require,module,exports){
+},{"../../utilities/Authorize":82,"react":"react","react-router":"react-router"}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15400,7 +15738,7 @@ var MoviePoster = function (_React$Component) {
 
 exports.default = MoviePoster;
 
-},{"react":"react"}],53:[function(require,module,exports){
+},{"react":"react"}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15528,7 +15866,7 @@ var MovieVotePanel = function (_React$Component) {
 
 exports.default = MovieVotePanel;
 
-},{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":76,"react":"react"}],54:[function(require,module,exports){
+},{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":78,"react":"react"}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15600,7 +15938,7 @@ var Form = function (_React$Component) {
 
 exports.default = Form;
 
-},{"react":"react"}],55:[function(require,module,exports){
+},{"react":"react"}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15657,7 +15995,7 @@ var RadioElement = function (_React$Component) {
 
 exports.default = RadioElement;
 
-},{"react":"react"}],56:[function(require,module,exports){
+},{"react":"react"}],58:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15708,7 +16046,7 @@ var RadioGroup = function (_React$Component) {
 
 exports.default = RadioGroup;
 
-},{"react":"react"}],57:[function(require,module,exports){
+},{"react":"react"}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15755,7 +16093,7 @@ var Submit = function (_React$Component) {
 
 exports.default = Submit;
 
-},{"react":"react"}],58:[function(require,module,exports){
+},{"react":"react"}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15824,7 +16162,7 @@ var TextGroup = function (_React$Component) {
 
 exports.default = TextGroup;
 
-},{"react":"react"}],59:[function(require,module,exports){
+},{"react":"react"}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15936,7 +16274,7 @@ var MovieCommentsPanelForm = function (_React$Component) {
 
 exports.default = MovieCommentsPanelForm;
 
-},{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":76,"react":"react"}],60:[function(require,module,exports){
+},{"../../actions/FormActions":37,"../../actions/MovieActions":38,"../../stores/FormStore":78,"react":"react"}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15969,7 +16307,7 @@ _toastr2.default.options = {
 
 exports.default = _toastr2.default;
 
-},{"toastr":32}],61:[function(require,module,exports){
+},{"toastr":32}],63:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16032,7 +16370,7 @@ var Auth = function () {
 
 exports.default = Auth;
 
-},{}],62:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16159,7 +16497,7 @@ var NavbarUserMenu = function (_React$Component) {
 
 exports.default = NavbarUserMenu;
 
-},{"../../actions/UserActions":40,"../../stores/UserStore":79,"react":"react","react-router":"react-router"}],63:[function(require,module,exports){
+},{"../../actions/UserActions":40,"../../stores/UserStore":81,"react":"react","react-router":"react-router"}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16248,7 +16586,7 @@ var UserProfileInfo = function (_React$Component) {
 
 exports.default = UserProfileInfo;
 
-},{"react":"react"}],64:[function(require,module,exports){
+},{"react":"react"}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16325,7 +16663,6 @@ var UserLogin = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _FormStore2.default.listen(this.onChange);
-      console.log('login did mount');
     }
   }, {
     key: 'componentWillUnmount',
@@ -16404,7 +16741,7 @@ var UserLogin = function (_React$Component) {
 
 exports.default = UserLogin;
 
-},{"../../actions/FormActions":37,"../../actions/UserActions":40,"../../stores/FormStore":76,"../form/Form":54,"../form/Submit":57,"../form/TextGroup":58,"../sub-components/ShowPopupMessage":60,"react":"react"}],65:[function(require,module,exports){
+},{"../../actions/FormActions":37,"../../actions/UserActions":40,"../../stores/FormStore":78,"../form/Form":56,"../form/Submit":59,"../form/TextGroup":60,"../sub-components/ShowPopupMessage":62,"react":"react"}],67:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16461,7 +16798,7 @@ var UserLogout = function (_Component) {
 
 exports.default = UserLogout;
 
-},{"./../../actions/UserActions":40,"./../sub-components/ShowPopupMessage":60,"react":"react"}],66:[function(require,module,exports){
+},{"./../../actions/UserActions":40,"./../sub-components/ShowPopupMessage":62,"react":"react"}],68:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16560,7 +16897,7 @@ var UserProfile = function (_React$Component) {
 
 exports.default = UserProfile;
 
-},{"../../stores/UserStore":79,"./UserInfo":63,"./UserRatedMovies":67,"./UserReviews":70,"react":"react"}],67:[function(require,module,exports){
+},{"../../stores/UserStore":81,"./UserInfo":65,"./UserRatedMovies":69,"./UserReviews":72,"react":"react"}],69:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16652,7 +16989,7 @@ var UserVotedMovies = function (_React$Component) {
 
 exports.default = UserVotedMovies;
 
-},{"./UserRatedMoviesPanel":68,"react":"react"}],68:[function(require,module,exports){
+},{"./UserRatedMoviesPanel":70,"react":"react"}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16702,7 +17039,7 @@ var UserVotedMoviesPanel = function (_React$Component) {
 
 exports.default = UserVotedMoviesPanel;
 
-},{"../depricated/MovieCard":48,"react":"react"}],69:[function(require,module,exports){
+},{"../depricated/MovieCard":50,"react":"react"}],71:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16890,7 +17227,7 @@ var UserRegister = function (_React$Component) {
 
 exports.default = UserRegister;
 
-},{"../../actions/FormActions":37,"../../actions/UserActions":40,"../../stores/FormStore":76,"../form/Form":54,"../form/RadioElement":55,"../form/RadioGroup":56,"../form/Submit":57,"../form/TextGroup":58,"../sub-components/ShowPopupMessage":60,"react":"react"}],70:[function(require,module,exports){
+},{"../../actions/FormActions":37,"../../actions/UserActions":40,"../../stores/FormStore":78,"../form/Form":56,"../form/RadioElement":57,"../form/RadioGroup":58,"../form/Submit":59,"../form/TextGroup":60,"../sub-components/ShowPopupMessage":62,"react":"react"}],72:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16982,7 +17319,7 @@ var UserReviews = function (_React$Component) {
 
 exports.default = UserReviews;
 
-},{"./UserReviewsPanel":71,"react":"react"}],71:[function(require,module,exports){
+},{"./UserReviewsPanel":73,"react":"react"}],73:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17032,7 +17369,7 @@ var UserReviewsPanel = function (_React$Component) {
 
 exports.default = UserReviewsPanel;
 
-},{"react":"react"}],72:[function(require,module,exports){
+},{"react":"react"}],74:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -17065,7 +17402,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _routes2.default
 ), document.getElementById('app'));
 
-},{"./routes":73,"history/lib/createBrowserHistory":20,"react":"react","react-dom":"react-dom","react-router":"react-router"}],73:[function(require,module,exports){
+},{"./routes":75,"history/lib/createBrowserHistory":20,"react":"react","react-dom":"react-dom","react-router":"react-router"}],75:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17114,6 +17451,10 @@ var _CreateArticlePage = require('./components/article/CreateArticlePage');
 
 var _CreateArticlePage2 = _interopRequireDefault(_CreateArticlePage);
 
+var _ArticleDetailsPage = require('./components/article/ArticleDetailsPage');
+
+var _ArticleDetailsPage2 = _interopRequireDefault(_ArticleDetailsPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createElement(
@@ -17125,10 +17466,11 @@ exports.default = _react2.default.createElement(
   _react2.default.createElement(_reactRouter.Route, { path: '/user/login', component: _UserLogin2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/user/logout', component: _UserLogout2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/category/add', component: _CategoryAddPage2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/article/add', component: _CreateArticlePage2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/article/add', component: _CreateArticlePage2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/article/:id', component: _ArticleDetailsPage2.default })
 );
 
-},{"./components/App":42,"./components/Home":44,"./components/article/CreateArticlePage":46,"./components/category/CategoryAddPage":47,"./components/user/UserLogin":64,"./components/user/UserLogout":65,"./components/user/UserProfile":66,"./components/user/UserRegister":69,"./utilities/Authorize":80,"react":"react","react-router":"react-router"}],74:[function(require,module,exports){
+},{"./components/App":42,"./components/Home":44,"./components/article/ArticleDetailsPage":47,"./components/article/CreateArticlePage":48,"./components/category/CategoryAddPage":49,"./components/user/UserLogin":66,"./components/user/UserLogout":67,"./components/user/UserProfile":68,"./components/user/UserRegister":71,"./utilities/Authorize":82,"react":"react","react-router":"react-router"}],76:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17162,6 +17504,9 @@ var ArticleStore = function () {
     this.description = '';
     this.articleCreated = false;
     this.categories = [];
+    this.latestNews = [];
+    this.article = {};
+    this.comments = [];
   }
 
   _createClass(ArticleStore, [{
@@ -17194,6 +17539,19 @@ var ArticleStore = function () {
     value: function onGetAllCategoriesSuccess(categories) {
       this.categories = categories;
     }
+  }, {
+    key: 'onGetLatestNewsSuccess',
+    value: function onGetLatestNewsSuccess(articles) {
+      this.latestNews = articles;
+    }
+  }, {
+    key: 'onGetByIdSuccess',
+    value: function onGetByIdSuccess(article) {
+      this.article = article;
+      this.creator = article.creator;
+      this.category = article.category;
+      this.comments = article.comments;
+    }
   }]);
 
   return ArticleStore;
@@ -17201,7 +17559,7 @@ var ArticleStore = function () {
 
 exports.default = _alt2.default.createStore(ArticleStore);
 
-},{"../actions/ArticleActions":35,"../alt":41}],75:[function(require,module,exports){
+},{"../actions/ArticleActions":35,"../alt":41}],77:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17255,7 +17613,7 @@ var CategoryStore = function () {
 
 exports.default = _alt2.default.createStore(CategoryStore);
 
-},{"../actions/CategoryActions":36,"../alt":41}],76:[function(require,module,exports){
+},{"../actions/CategoryActions":36,"../alt":41}],78:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17460,7 +17818,7 @@ var FormStore = function () {
 
 exports.default = _alt2.default.createStore(FormStore);
 
-},{"../actions/FormActions":37,"../actions/MovieActions":38,"../actions/UserActions":40,"../alt":41}],77:[function(require,module,exports){
+},{"../actions/FormActions":37,"../actions/MovieActions":38,"../actions/UserActions":40,"../alt":41}],79:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17576,7 +17934,7 @@ var MovieStore = function () {
 
 exports.default = _alt2.default.createStore(MovieStore);
 
-},{"../actions/MovieActions":38,"../alt":41}],78:[function(require,module,exports){
+},{"../actions/MovieActions":38,"../alt":41}],80:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17618,7 +17976,7 @@ var NavbarStore = function () {
 
 exports.default = _alt2.default.createStore(NavbarStore);
 
-},{"../actions/NavbarActions":39,"../alt":41}],79:[function(require,module,exports){
+},{"../actions/NavbarActions":39,"../alt":41}],81:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17696,7 +18054,7 @@ var AppStore = function () {
 
 exports.default = _alt2.default.createStore(AppStore);
 
-},{"../actions/UserActions":40,"../alt":41,"../components/user/Auth":61}],80:[function(require,module,exports){
+},{"../actions/UserActions":40,"../alt":41,"../components/user/Auth":63}],82:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17816,8 +18174,8 @@ var Concealer = exports.Concealer = function (_React$Component2) {
   return Concealer;
 }(_react2.default.Component);
 
-},{"../actions/FormActions":37,"../stores/UserStore":79,"react":"react"}],81:[function(require,module,exports){
-"use strict";
+},{"../actions/FormActions":37,"../stores/UserStore":81,"react":"react"}],83:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17833,19 +18191,17 @@ var Helpers = function () {
   }
 
   _createClass(Helpers, null, [{
-    key: "formatMovieRating",
-    value: function formatMovieRating(score, votes) {
-      var rating = score / votes;
-
-      if (isNaN(rating)) {
-        rating = 0;
+    key: 'formatDate',
+    value: function formatDate(dateISO8601) {
+      var date = new Date(dateISO8601);
+      if (Number.isNaN(date.getDate())) {
+        return '';
       }
+      return date.getDate() + '.' + padZeros(date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + date.getHours() + ':' + padZeros(date.getMinutes()) + ':' + padZeros(date.getSeconds());
 
-      if (rating % 1 !== 0) {
-        rating = rating.toFixed(1);
+      function padZeros(num) {
+        return ('0' + num).slice(-2);
       }
-
-      return rating;
     }
   }]);
 
@@ -17854,7 +18210,7 @@ var Helpers = function () {
 
 exports.default = Helpers;
 
-},{}],82:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17912,6 +18268,6 @@ var RequesterTMDB = function () {
 
 exports.default = RequesterTMDB;
 
-},{}]},{},[72])
+},{}]},{},[74])
 
 //# sourceMappingURL=bundle.js.map
