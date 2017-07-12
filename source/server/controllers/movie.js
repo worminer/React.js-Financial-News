@@ -23,7 +23,7 @@ module.exports = {
   },
   topTen: {
     get: (req, res) => {
-      Article.find().sort({score: -1}).limit(10).then(article => {
+      Article.find().sort({score: -1}).limit(5).then(article => {
         if (!article) {
           return res.status(400)
             .send({message: 'No articles. Care to add some?'})

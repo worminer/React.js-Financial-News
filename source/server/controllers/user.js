@@ -61,8 +61,8 @@ module.exports = {
 
       User.findById(userId).then(user => {
         if (!user) {
-          return res.status(404).
-            send({message: 'User no longer exists'})
+          return res.status(404)
+            .send({message: 'User no longer exists'})
         }
 
         res.status(200).send(user)
