@@ -31,8 +31,8 @@ export default class Navbar extends React.Component {
     NavbarStore.unlisten(this.onChange)
   }
 
-
   render () {
+
     return (
       <nav className='navbar navbar-default navbar-static-top'>
         <div className='navbar-header'>
@@ -60,7 +60,7 @@ export default class Navbar extends React.Component {
                             <div className='tri'/>
                             <div className='tri invert'/>
                         </span>
-            MDB
+            CPG
           </Link>
         </div>
         <div id='navbar' className='navbar-collapse collapse'>
@@ -75,7 +75,7 @@ export default class Navbar extends React.Component {
               <Link to='/article/add'>Add Article</Link>
             </li>
           </ul>
-          <NavbarUserMenu userData={ this.props.userData }/>
+          <NavbarUserMenu userData={this.props.userData} />
         </div>
       </nav>
     )

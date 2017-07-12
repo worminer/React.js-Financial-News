@@ -32,10 +32,10 @@ export default class UserVotedMovies extends React.Component {
         <div className='pull-right btn-group'>
           <a className='btn btn-primary'
             onClick={this.toggleRatedMovies.bind(this)}>
-            { this.state.showRatedMoviesPanel ? 'Hide' : 'Rated Movies' }
+            { this.state.showRatedMoviesPanel ? 'Hide' : 'Rated News' }
           </a>
         </div>
-        { this.state.showRatedMoviesPanel
+        { this.state.showRatedMoviessPanel
         ? <UserRatedMoviesPanel movies={this.props.votes} /> : null }
       </div>
     )

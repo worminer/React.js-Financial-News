@@ -1,15 +1,15 @@
 import React from 'react'
 
-import MovieActions from '../actions/MovieActions'
-import MovieStore from '../stores/MovieStore'
-
-import MovieCard from './depricated/MovieCard'
+import ArticleActions from '../actions/ArticleActions'
+import ArticleStore from '../stores/ArticleStore'
+import Helpers from '../utilities/Helpers'
+import {Link} from 'react-router'
 
 export default class Home extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = MovieStore.getState()
+    this.state = ArticleStore.getState()
 
     this.onChange = this.onChange.bind(this)
   }
@@ -19,31 +19,35 @@ export default class Home extends React.Component {
   }
 
   componentDidMount () {
-    MovieStore.listen(this.onChange)
-
-    //MovieActions.getTopTenMovies()
+    ArticleStore.listen(this.onChange)
+    ArticleActions.getLatestNews()
   }
 
   componentWillUnmount () {
-    MovieStore.unlisten(this.onChange)
+    ArticleStore.unlisten(this.onChange)
   }
 
   render () {
-    let movies = this.state.topTenMovies.map((movie, index) => {
+    let news = this.state.latestNews.map((article, index) => {
       return (
-        <MovieCard key={ movie._id }
-                   movie={ movie }
-                   index={ index }/>
+        <div className='single-article' key={index}>
+          <Link to={`/article/${article._id}`}>
+            <img src={article.image} alt='article' />
+            <h3>{article.title}</h3>
+          </Link>
+          <p>{Helpers.formatDate(article.dateCreated)}</p>
+          <p>{article.description.substr(0, 300)}</p>
+        </div>
       )
     })
 
     return (
       <div className='container'>
         <h3 className='text-center'>Welcome to
-          <strong> Movie Database</strong>
+          <strong> Financial News</strong>
         </h3>
-        <div className="list-group">
-          { movies }
+        <div className='list-group'>
+          {news}
         </div>
       </div>
     )

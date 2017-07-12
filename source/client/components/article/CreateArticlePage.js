@@ -2,6 +2,7 @@ import React from 'react'
 import ArticleStore from '../../stores/ArticleStore'
 import ArticleActions from '../../actions/ArticleActions'
 import ShowMessage from './../sub-components/ShowPopupMessage'
+import alt from '../../alt'
 
 export default class CreateArticlePage extends React.Component {
   constructor (props) {
@@ -54,6 +55,7 @@ export default class CreateArticlePage extends React.Component {
 
   handleArticleCreation (article) {
     ShowMessage.success(`Article '${this.state.title}' created!`)
+    alt.recycle(ArticleStore)
     this.props.history.push('/articles/all')
   }
 
@@ -63,43 +65,56 @@ export default class CreateArticlePage extends React.Component {
     })
 
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className='form-group'>
-          <label className='control-label'>Title</label>
-          <input type='text'
-            className='form-control'
-            value={this.state.title}
-            onChange={ArticleActions.handleTitleChange} />
+      <div className='container'>
+        <div className='row flipInX animated'>
+          <div className='container'>
+            <div className='col-md-6 col-md-offset-3'>
+              <div className='panel panel-default'>
+                <div className='panel-heading'>Add new article</div>
+                <div className='panel-body'>
+                  <form onSubmit={this.handleSubmit.bind(this)}>
+                    <div className='form-group'>
+                      <label className='control-label'>Title</label>
+                      <input type='text'
+                        className='form-control'
+                        value={this.state.title}
+                        onChange={ArticleActions.handleTitleChange} />
+                    </div>
+                    <div className='form-group'>
+                      <label className='control-label'>Description</label>
+                      <textarea
+                        className='form-control'
+                        rows='5'
+                        value={this.state.description}
+                        onChange={ArticleActions.handleDescriptionChange} />
+                    </div>
+                    <div className='form-group'>
+                      <label className='control-label'>Category</label>
+                      <select
+                        className='form-control'
+                        value={this.state.category}
+                        onChange={ArticleActions.handleCategoryChange}
+                        required >
+                        <option disabled>Select a category</option>
+                        {categories}
+                      </select>
+                    </div>
+                    <div className='form-group'>
+                      <label className='control-label'>Image</label>
+                      <input type='url'
+                        className='form-control'
+                        value={this.state.image}
+                        onChange={ArticleActions.handleImageChange} />
+                    </div>
+                    <button type='submit' className='btn btn-primary'>Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='form-group'>
-          <label className='control-label'>Description</label>
-          <textarea
-            className='form-control'
-            rows='5'
-            value={this.state.description}
-            onChange={ArticleActions.handleDescriptionChange} />
-        </div>
-        <div className='form-group'>
-          <label className='control-label'>Category</label>
-          <select
-            className='form-control'
-            value={this.state.category}
-            onChange={ArticleActions.handleCategoryChange}
-            required >
-            <option disabled>Select a category</option>
-            {categories}
-          </select>
-        </div>
-        <div className='form-group'>
-          <label className='control-label'>Image</label>
-          <input type='url'
-            className='form-control'
-            value={this.state.image}
-            onChange={ArticleActions.handleImageChange} />
-        </div>
-        <button type='submit' className='btn btn-primary'>Submit
-        </button>
-      </form>
+      </div>
     )
   }
 }

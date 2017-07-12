@@ -12,6 +12,7 @@ import UserLogout from './components/user/UserLogout'
 
 import CategoryAddPage from './components/category/CategoryAddPage'
 import CreateArticlePage from './components/article/CreateArticlePage'
+import ArticleDetailsPage from './components/article/ArticleDetailsPage'
 
 export default (
   <Route component={App}>
@@ -24,5 +25,6 @@ export default (
 
     <Route path='/category/add' component={CategoryAddPage} />
     <Route path='/article/add' component={CreateArticlePage} />
+    <Route path='/article/:id' component={ArticleDetailsPage} />
   </Route>
 )

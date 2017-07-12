@@ -12,6 +12,8 @@ module.exports = (app) => {
   app.get('/api/categories/all', controllers.category.all)
   // Article routes
   app.post('/api/articles/add', controllers.article.add)
+  app.get('/api/articles/latest', controllers.article.latestNews)
+  app.get('/api/articles/:id', controllers.article.getById)
 
   // Movie routes
   // app.post('/api/movies/add', controllers.movie.add.post)

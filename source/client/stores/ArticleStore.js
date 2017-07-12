@@ -12,6 +12,9 @@ class ArticleStore {
     this.description = ''
     this.articleCreated = false
     this.categories = []
+    this.latestNews = []
+    this.article = {}
+    this.comments = []
   }
 
   onCreateArticleSuccess () {
@@ -36,6 +39,17 @@ class ArticleStore {
 
   onGetAllCategoriesSuccess (categories) {
     this.categories = categories
+  }
+
+  onGetLatestNewsSuccess (articles) {
+    this.latestNews = articles
+  }
+
+  onGetByIdSuccess (article) {
+    this.article = article
+    this.creator = article.creator
+    this.category = article.category
+    this.comments = article.comments
   }
 }
 
