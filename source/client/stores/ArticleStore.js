@@ -5,6 +5,7 @@ class ArticleStore {
   constructor () {
     this.bindActions(ArticleActions)
 
+    this._id = ''
     this.title = ''
     this.category = ''
     this.creator = ''
@@ -17,8 +18,12 @@ class ArticleStore {
     this.comments = []
   }
 
-  onCreateArticleSuccess () {
+  onCreateArticleSuccess (data) {
+    this._id = data.article._id;
     this.articleCreated = true
+  }
+  onCreateArticleFail (err) {
+    console.log(err)
   }
 
   onHandleTitleChange (ev) {

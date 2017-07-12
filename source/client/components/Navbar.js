@@ -68,12 +68,6 @@ export default class Navbar extends React.Component {
             <li>
               <Link to='/'>Home</Link>
             </li>
-            <li>
-              <Link to='/category/add'>Add Category</Link>
-            </li>
-            <li>
-              <Link to='/article/add'>Add Article</Link>
-            </li>
           </ul>
           <NavbarUserMenu userData={this.props.userData} />
         </div>

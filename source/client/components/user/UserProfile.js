@@ -42,9 +42,9 @@ export default class UserProfile extends React.Component {
         
         <section className="container">
           <UserInfo
-            name       ={ this.state.name }
-            roles      ={ this.state.roles }
-            information={ this.state.information }
+            name       ={this.state.name }
+            roles      ={this.state.roles }
+            information={this.state.information }
             picture    ={this.state.picture || '/images/user-default.png'}
             username   ={this.state.username }
             firstName  ={this.state.firstName}

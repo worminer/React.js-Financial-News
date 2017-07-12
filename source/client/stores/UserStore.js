@@ -23,11 +23,11 @@ class AppStore {
         this.loggedInUserId = Auth.getToken()
         this.username = Auth.getData('username') || ''
         this.roles = Auth.getDataArray('roles') || []
-        this.picture = Auth.getData('picture') || ''
-        this.firstName = Auth.getData('firstName') || 'Unknown'
-        this.lastName = Auth.getData('lastName') || 'Unknown'
-        this.age = Auth.getData('age') || 'Unknown'
-        this.gender = Auth.getData('gender') || 'Unknown'
+        this.picture = Auth.getData('picture')
+        this.firstName = Auth.getData('firstName')
+        this.lastName = Auth.getData('lastName')
+        this.age = Auth.getData('age')
+        this.gender = Auth.getData('gender')
         //this.emitChange();
       }
     });

@@ -18,13 +18,13 @@ export default (
   <Route component={App}>
     <Route path='/' component={Home} />
 
-    <Route path='/user/profile/:userId' component={authorize(UserProfile)} />
+    <Route path='/user/profile' component={authorize(UserProfile)} />
     <Route path='/user/register' component={UserRegister} />
     <Route path='/user/login' component={UserLogin} />
-    <Route path='/user/logout' component={UserLogout} />
+    <Route path='/user/logout' component={authorize(UserLogout)} />
 
-    <Route path='/category/add' component={CategoryAddPage} />
-    <Route path='/article/add' component={CreateArticlePage} />
-    <Route path='/article/:id' component={ArticleDetailsPage} />
+    <Route path='/category/add' component={authorize(CategoryAddPage)} />
+    <Route path='/article/add' component={authorize(CreateArticlePage)} />
+    <Route path='/article/:id' component={authorize(ArticleDetailsPage)} />
   </Route>
 )

@@ -3,6 +3,7 @@ import ArticleStore from '../../stores/ArticleStore'
 import ArticleActions from '../../actions/ArticleActions'
 import ShowMessage from './../sub-components/ShowPopupMessage'
 import alt from '../../alt'
+import Auth from './../user/Auth'
 
 export default class CreateArticlePage extends React.Component {
   constructor (props) {
@@ -33,8 +34,7 @@ export default class CreateArticlePage extends React.Component {
   handleSubmit (ev) {
     ev.preventDefault()
 
-    let title = this.state.title
-    if (!title) {
+    if (!this.state.title) {
       return
     }
 
@@ -47,16 +47,17 @@ export default class CreateArticlePage extends React.Component {
       description: this.state.description,
       category: this.state.category,
       image: this.state.image,
-      creator: '5964d94c52490d1f60fc9494'
+      creator: Auth.getToken()
     }
 
     ArticleActions.createArticle(data)
   }
 
-  handleArticleCreation (article) {
+  handleArticleCreation () {
     ShowMessage.success(`Article '${this.state.title}' created!`)
+    let id = this.state._id;
     alt.recycle(ArticleStore)
-    this.props.history.push('/articles/all')
+    this.props.history.push(`/article/${id}`)
   }
 
   render () {

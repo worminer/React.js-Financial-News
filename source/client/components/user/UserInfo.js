@@ -17,7 +17,7 @@ export default class UserProfileInfo extends React.Component {
       })
     }
     return (
-      <div className='row flipInX jumbotron'>
+      <div className='row flipInX animated jumbotron'>
         <div>
           <h2>User Profile</h2>
         </div>
@@ -40,28 +40,23 @@ export default class UserProfileInfo extends React.Component {
               </tr>
               <tr>
                 <th>First Name</th>
-                <td>{this.props.firstName}</td>
+                <td>{this.props.firstName || 'Unknown' }</td>
               </tr>
               <tr>
                 <th>Last Name</th>
-                <td>{this.props.lastName}</td>
+                <td>{this.props.lastName  || 'Unknown' }</td>
               </tr>
               <tr>
                 <th>Age</th>
-                <td>{this.props.age}</td>
+                <td>{(this.props.age || 'Unknown')}  </td>
               </tr>
               <tr>
                 <th>Sex</th>
-                <td>{this.props.gender}</td>
+                <td>{this.props.gender || "Unknown"}</td>
               </tr>
               </tbody>
             </table>
-          </div>
-          <div className='profile-info clearfix'>
-            <h2><strong>{ this.props.name }</strong></h2>
-            <h4 className='lead'>Roles:</h4>
-            { roles }
-            <p>{ this.props.information }</p>
+            <div><p>{ this.props.information }</p></div>
           </div>
         </div>
       </div>

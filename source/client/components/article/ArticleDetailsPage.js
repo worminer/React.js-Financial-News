@@ -1,8 +1,7 @@
 import React from 'react'
 import ArticleStore from '../../stores/ArticleStore'
 import ArticleActions from '../../actions/ArticleActions'
-import ShowMessage from './../sub-components/ShowPopupMessage'
-import ArtiCleCard from './ArticleCard'
+import ArticleCard from './ArticleCard'
 
 export default class ArticleDetailsPage extends React.Component {
   constructor (props) {
@@ -14,9 +13,6 @@ export default class ArticleDetailsPage extends React.Component {
 
   onChange (state) {
     this.setState(state)
-    if (state.articleCreated) {
-      this.handleArticleCreation()
-    }
   }
 
   componentDidMount () {
@@ -31,10 +27,10 @@ export default class ArticleDetailsPage extends React.Component {
   render () {
     console.log(this.state.article.creator)
     return (
-      <ArtiCleCard article={this.state.article}
-        comments={this.state.comments}
-        creator={this.state.creator}
-        category={this.state.category} />
+      <ArticleCard article={this.state.article}
+                   comments={this.state.comments}
+                   creator={this.state.creator}
+                   category={this.state.category} />
     )
   }
 }

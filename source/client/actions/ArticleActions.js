@@ -4,11 +4,13 @@ class ArticleActions {
   constructor () {
     this.generateActions(
       'createArticleSuccess',
+      'createArticleFail',
       'handleTitleChange',
       'handleDescriptionChange',
       'handleImageChange',
       'handleCategoryChange',
       'getAllCategoriesSuccess',
+      'getAllCategoriesFail',
       'getLatestNewsSuccess',
       'getByIdSuccess'
     )
@@ -24,7 +26,7 @@ class ArticleActions {
 
     $.ajax(request).done(data => {
       this.createArticleSuccess(data)
-    })
+    }).fail(err => this.createArticleFail(err))
 
     return true
   }
@@ -38,7 +40,7 @@ class ArticleActions {
 
     $.ajax(request).done(data => {
       this.getAllCategoriesSuccess(data)
-    })
+    }).fail(err => this.getAllCategoriesFail(err))
 
     return true
   }
@@ -56,6 +58,8 @@ class ArticleActions {
 
     return true
   }
+
+
 
   getById (id) {
     let request = {
