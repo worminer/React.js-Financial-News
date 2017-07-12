@@ -35,21 +35,21 @@ export default class MovieCard extends React.Component {
       <div className='animated fadeIn'>
         <div className='media movie'>
           <span className='position pull-left'>{ this.props.index + 1 }</span>
-          <MoviePoster posterUrl={ this.props.movie.moviePosterUrl }/>
-          <MovieInfo movie={ this.props.movie }/>
+          <MoviePoster posterUrl={this.props.movie.moviePosterUrl} />
+          <MovieInfo movie={this.props.movie} />
           <MoviePanelsToggle
-            toggleCommentsPanel={ this.toggleCommentsPanel.bind(this) }
-            toggleVotePanel={ this.toggleVotePanel.bind(this) }
-            showCommentsPanel={ this.state.showCommentsPanel }
-            showVotePanel={ this.state.showVotePanel }
-            movieId={ this.props.movie._id }/>
+            toggleCommentsPanel={this.toggleCommentsPanel.bind(this)}
+            toggleVotePanel={this.toggleVotePanel.bind(this)}
+            showCommentsPanel={this.state.showCommentsPanel}
+            showVotePanel={this.state.showVotePanel}
+            movieId={this.props.movie._id} />
         </div>
-        {this.state.showVotePanel ?
-          <MovieVotePanel movieId={ this.props.movie._id }/> : null}
-        {this.state.showCommentsPanel ?
-          <MovieCommentsPanel comments={this.props.movie.comments}
-                              movieId={ this.props.movie._id }/> : null}
-        <div id="clear"/>
+        {this.state.showVotePanel
+        ? <MovieVotePanel movieId={this.props.movie._id} /> : null}
+        {this.state.showCommentsPanel
+        ? <MovieCommentsPanel comments={this.props.movie.comments}
+          movieId={this.props.movie._id} /> : null}
+        <div id='clear' />
       </div>
     )
   }

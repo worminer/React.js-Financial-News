@@ -54,10 +54,10 @@ export default class Footer extends React.Component {
 
               </ul>
             </div>
-            <div className="col-sm-3">
-              <h3 className="lead">Author</h3>
-              <a href="https://github.com/achobanov">
-                <strong> Alex Chobanov</strong>
+            <div className='col-sm-3'>
+              <h3 className='lead'>Author</h3>
+              <a href='https://github.com/worminer/React.js-Financial-News'>
+                <strong>Cal Poli green</strong>
               </a>
             </div>
           </div>

@@ -36,25 +36,25 @@ export default class MovieVotePanel extends React.Component {
   render () {
     return (
       <div
-        className="col-sm-4 col-xs-offset-8 list-group-item animated fadeIn vote">
-        <div className="media">
-          <div className="media-body">
+        className='col-sm-4 col-xs-offset-8 list-group-item animated fadeIn vote'>
+        <div className='media'>
+          <div className='media-body'>
             <div
-              className={ `form-group ${ this.state.scoreValidationState }` }>
-              <span className="help-block">{ this.state.message }</span>
+              className={`form-group ${ this.state.scoreValidationState}`}>
+              <span className='help-block'>{ this.state.message }</span>
             </div>
-            <form className="form-inline"
-                  onSubmit={ this.handleSubmit.bind(this) }>
+            <form className='form-inline'
+              onSubmit={this.handleSubmit.bind(this)}>
               <div
-                className={ `form-group ${ this.state.scoreValidationState }` }>
-                <label className="control-label">Score</label>
-                <input className="form-control"
-                       step="0.1"
-                       type="number"
-                       value={ this.state.score ||
-                       this.props.loggedInUserScore }
-                       onChange={ FormActions.handleScoreChange }/>
-                <input className="btn btn-primary" type="submit" value="Vote"/>
+                className={ `form-group ${this.state.scoreValidationState}`}>
+                <label className='control-label'>Score</label>
+                <input className='form-control'
+                  step='0.1'
+                  type='number'
+                  value={this.state.score ||
+                  this.props.loggedInUserScore}
+                  onChange={FormActions.handleScoreChange} />
+                <input className='btn btn-primary' type='submit' value='Vote' />
               </div>
             </form>
           </div>

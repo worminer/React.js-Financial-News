@@ -1,6 +1,5 @@
 class Auth {
-
-  static setData(key, user) {
+  static setData (key, user) {
     window.localStorage.setItem(key, JSON.stringify(user))
   }
 
@@ -19,7 +18,7 @@ class Auth {
     window.localStorage.setItem('token', token)
   }
 
-  static isUserAuthenticated(){
+  static isUserAuthenticated () {
     return window.localStorage.getItem('token')
   }
 

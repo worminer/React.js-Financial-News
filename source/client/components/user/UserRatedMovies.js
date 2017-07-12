@@ -7,19 +7,19 @@ export default class UserVotedMovies extends React.Component {
     super(props)
 
     this.state = {
-      showRatedMoviesPanel: false,
+      showRatedMoviesPanel: false
     }
   }
 
   toggleRatedMovies () {
     this.setState(prevState => ({
-      showRatedMoviesPanel: !prevState.showRatedMoviesPanel,
+      showRatedMoviesPanel: !prevState.showRatedMoviesPanel
     }))
   }
 
   render () {
     return (
-      <div className="container profile-container">
+      <div className='container profile-container'>
         <div className='profile-stats clearfix'>
           <ul>
             <li>
@@ -29,14 +29,14 @@ export default class UserVotedMovies extends React.Component {
             </li>
           </ul>
         </div>
-        <div className="pull-right btn-group">
-          <a className="btn btn-primary"
-             onClick={ this.toggleRatedMovies.bind(this) }>
+        <div className='pull-right btn-group'>
+          <a className='btn btn-primary'
+            onClick={this.toggleRatedMovies.bind(this)}>
             { this.state.showRatedMoviesPanel ? 'Hide' : 'Rated Movies' }
           </a>
         </div>
-        { this.state.showRatedMoviesPanel ?
-          <UserRatedMoviesPanel movies={ this.props.votes }/> : null }
+        { this.state.showRatedMoviesPanel
+        ? <UserRatedMoviesPanel movies={this.props.votes} /> : null }
       </div>
     )
   }
