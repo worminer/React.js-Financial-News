@@ -24,5 +24,9 @@ module.exports = {
         })
       })
     })
+  },
+
+  latestNews: (req, res) => {
+    Article.find().sort('-dateCreated').limit(6).then(articles => res.status(200).send(articles))
   }
 }

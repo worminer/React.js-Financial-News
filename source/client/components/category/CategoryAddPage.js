@@ -2,6 +2,7 @@ import React from 'react'
 import CategoryStore from '../../stores/CategoryStore'
 import CategoryActions from '../../actions/CategoryActions'
 import ShowMessage from './../sub-components/ShowPopupMessage'
+import alt from '../../alt'
 
 export default class CategoryAddPage extends React.Component {
   constructor (props) {
@@ -38,8 +39,8 @@ export default class CategoryAddPage extends React.Component {
   }
 
   handleCategoryCreation (category) {
-    console.log('create')
     ShowMessage.success(`Category '${this.state.name}' created!`)
+    alt.recycle(CategoryStore)
     this.props.history.push('/categories/all')
   }
 

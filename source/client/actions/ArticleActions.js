@@ -8,7 +8,8 @@ class ArticleActions {
       'handleDescriptionChange',
       'handleImageChange',
       'handleCategoryChange',
-      'getAllCategoriesSuccess'
+      'getAllCategoriesSuccess',
+      'getLatestNewsSuccess'
     )
   }
 
@@ -36,6 +37,20 @@ class ArticleActions {
 
     $.ajax(request).done(data => {
       this.getAllCategoriesSuccess(data)
+    })
+
+    return true
+  }
+
+  getLatestNews () {
+    let request = {
+      url: '/api/articles/latest',
+      method: 'GET',
+      contentType: 'application/json'
+    }
+
+    $.ajax(request).done(data => {
+      this.getLatestNewsSuccess(data)
     })
 
     return true
