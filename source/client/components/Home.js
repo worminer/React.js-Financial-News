@@ -3,7 +3,7 @@ import React from 'react'
 import MovieActions from '../actions/MovieActions'
 import MovieStore from '../stores/MovieStore'
 
-import MovieCard from './sub-components/MovieCard'
+import MovieCard from './depricated/MovieCard'
 
 export default class Home extends React.Component {
   constructor (props) {
@@ -21,7 +21,7 @@ export default class Home extends React.Component {
   componentDidMount () {
     MovieStore.listen(this.onChange)
 
-    MovieActions.getTopTenMovies()
+    //MovieActions.getTopTenMovies()
   }
 
   componentWillUnmount () {

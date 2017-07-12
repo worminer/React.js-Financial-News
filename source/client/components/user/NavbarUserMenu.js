@@ -44,10 +44,13 @@ export default class NavbarUserMenu extends React.Component {
         <ul className="nav navbar-nav pull-right">
           <li>
             <Link
-              to={ `/user/profile/${ this.state.loggedInUserId }` }>Profile</Link>
+              to={ `/user/profile/${ this.state.loggedInUserId }` }
+            >
+              Profile
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={ UserActions.logoutUser }>Logout</a>
+            <Link to="/user/logout" >Logout</Link>
           </li>
         </ul>
       )

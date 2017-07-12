@@ -1,6 +1,6 @@
 import alt from '../alt'
 import UserActions from '../actions/UserActions'
-import Auth from '../components/Auth'
+import Auth from '../components/user/Auth'
 
 class AppStore {
   constructor () {

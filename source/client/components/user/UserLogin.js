@@ -1,11 +1,11 @@
 import React from 'react'
-import UserActions from '../actions/UserActions'
-import FormActions from '../actions/FormActions'
-import FormStore from '../stores/FormStore'
-import Form from './form/Form'
-import TextGroup from './form/TextGroup'
-import Submit from './form/Submit'
-import ShowMessage from './sub-components/ShowPopupMessage'
+import UserActions from '../../actions/UserActions'
+import FormActions from '../../actions/FormActions'
+import FormStore from '../../stores/FormStore'
+import Form from '../form/Form'
+import TextGroup from '../form/TextGroup'
+import Submit from '../form/Submit'
+import ShowMessage from '../sub-components/ShowPopupMessage'
 
 export default class UserLogin extends React.Component {
   constructor (props) {

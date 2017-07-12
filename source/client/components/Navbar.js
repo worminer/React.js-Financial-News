@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import NavbarActions from '../actions/NavbarActions'
 import NavbarStore from '../stores/NavbarStore'
 
-import NavbarUserMenu from './sub-components/NavbarUserMenu'
+import NavbarUserMenu from './user/NavbarUserMenu'
 
 export default class Navbar extends React.Component {
   constructor (props) {
@@ -31,8 +31,12 @@ export default class Navbar extends React.Component {
     NavbarStore.unlisten(this.onChange)
   }
 
+  componentDidUpdate()
+  {
+    $('.menuToggle').bootstrapToggle();
+  }
   render () {
-    let navbarUserMenu = <NavbarUserMenu userData={ this.props.userData }/>
+
     return (
       <nav className='navbar navbar-default navbar-static-top'>
         <div className='navbar-header'>
@@ -69,10 +73,13 @@ export default class Navbar extends React.Component {
               <Link to='/'>Home</Link>
             </li>
             <li>
-              <Link to='/movie/add'>Add Movie</Link>
+              <Link to='/category/add'>Add Category</Link>
+            </li>
+            <li>
+              <Link to='/article/add'>Add Article</Link>
             </li>
           </ul>
-          { navbarUserMenu }
+          <NavbarUserMenu userData={ this.props.userData }/>
         </div>
       </nav>
     )

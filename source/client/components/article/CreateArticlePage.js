@@ -1,7 +1,7 @@
 import React from 'react'
 import ArticleStore from '../../stores/ArticleStore'
 import ArticleActions from '../../actions/ArticleActions'
-import toastr from 'toastr'
+import ShowMessage from './../sub-components/ShowPopupMessage'
 
 export default class CreateArticlePage extends React.Component {
   constructor (props) {
@@ -53,7 +53,7 @@ export default class CreateArticlePage extends React.Component {
   }
 
   handleArticleCreation (article) {
-    toastr.success(`Article '${this.state.title}' created!`)
+    ShowMessage.success(`Article '${this.state.title}' created!`)
     this.props.history.push('/articles/all')
   }
 

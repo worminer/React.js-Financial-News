@@ -19,10 +19,6 @@ export default class Footer extends React.Component {
 
   componentDidMount () {
     MovieStore.listen(this.onChange)
-
-    MovieActions.getFiveRecentMovies()
-    this.interval = setInterval(() => MovieActions.getFiveRecentMovies(),
-      30000)
   }
 
   componentWillUnmount () {
@@ -31,13 +27,7 @@ export default class Footer extends React.Component {
   }
 
   render () {
-    let mostRecentMovies = this.state.mostRecentMovies.map(movie => {
-      return (
-        <li key={movie._id}>
-          <Link to={`/...`}>{movie.name}</Link>
-        </li>
-      )
-    })
+
 
     return (
       <footer>
@@ -61,7 +51,7 @@ export default class Footer extends React.Component {
                 <strong>Newest</strong> 5 Movies
               </h3>
               <ul className='list-inline'>
-                {mostRecentMovies}
+
               </ul>
             </div>
             <div className="col-sm-3">

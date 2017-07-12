@@ -1,9 +1,9 @@
 import React from 'react'
 
-import UserStore from '../stores/UserStore'
-import UserInfo from './sub-components/UserInfo'
-import UserVotedMovies from './sub-components/UserRatedMovies'
-import UserReviews from './sub-components/UserReviews'
+import UserStore from '../../stores/UserStore'
+import UserInfo from './UserInfo'
+import UserVotedMovies from './UserRatedMovies'
+import UserReviews from './UserReviews'
 
 export default class UserProfile extends React.Component {
   constructor (props) {

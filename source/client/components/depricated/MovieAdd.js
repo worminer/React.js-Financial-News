@@ -1,7 +1,7 @@
 import React from 'react'
 
-import MovieAddActions from '../actions/MovieAddActions'
-import MovieAddStore from '../stores/MovieAddStore'
+import MovieAddActions from '../../actions/MovieAddActions'
+import MovieAddStore from '../../stores/MovieAddStore'
 
 export default class AddMovie extends React.Component {
   constructor (props) {

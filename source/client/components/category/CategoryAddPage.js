@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoryStore from '../../stores/CategoryStore'
 import CategoryActions from '../../actions/CategoryActions'
-import toastr from 'toastr'
+import ShowMessage from './../sub-components/ShowPopupMessage'
 
 export default class CategoryAddPage extends React.Component {
   constructor (props) {
@@ -39,7 +39,7 @@ export default class CategoryAddPage extends React.Component {
 
   handleCategoryCreation (category) {
     console.log('create')
-    toastr.success(`Category '${this.state.name}' created!`)
+    ShowMessage.success(`Category '${this.state.name}' created!`)
     this.props.history.push('/categories/all')
   }
 

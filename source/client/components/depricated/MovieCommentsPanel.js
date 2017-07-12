@@ -1,5 +1,5 @@
 import React from 'react'
-import CommentForm from './CommentForm'
+import CommentForm from '../sub-components/CommentForm'
 
 export default class MovieCommentsPanel extends React.Component {
   render () {

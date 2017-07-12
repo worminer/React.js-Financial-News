@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MovieCard from './MovieCard'
+import MovieCard from '../depricated/MovieCard'
 
 export default class UserVotedMoviesPanel extends React.Component {
   constructor (props) {
